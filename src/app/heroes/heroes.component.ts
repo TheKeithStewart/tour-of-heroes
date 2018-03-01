@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { Hero } from './../models/hero.model';
+import * as fromHero from './../reducers/hero.reducer';
+import * as HeroActions from './../actions/hero.actions';
 
 @Component({
   selector: 'app-heroes',
@@ -9,31 +12,31 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
+  heroes: Observable<Hero[]>;
+  heroIds: number[] = [];
 
-  constructor(private heroService: HeroService) { }
+  constructor(private store: Store<fromHero.State>) { }
 
   ngOnInit() {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
-    .subscribe(heroes => this.heroes = heroes);
+    this.heroes = this.store.select(fromHero.getAllHeroes);
+    this.store.select(fromHero.getHeroIdState)
+      .subscribe((ids: number[]) => this.heroIds = ids);
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero({ name } as Hero)
-      .subscribe(hero => {
-        this.heroes.push(hero);
-      });
+    
+    const nextId = this.heroIds.length > 0 ? Math.max(...this.heroIds) + 1 : 0;
+    this.store.dispatch(new HeroActions.AddHero({ hero: { id: nextId, name: name } }))
   }
 
   delete(hero: Hero): void {
-    this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    this.store.dispatch(new HeroActions.DeleteHero({ id: hero.id }))
   }
 
 }
