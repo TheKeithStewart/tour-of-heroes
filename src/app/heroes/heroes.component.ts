@@ -6,6 +6,8 @@ import { Hero } from './../models/hero.model';
 import * as fromHero from './../reducers/hero.reducer';
 import * as HeroActions from './../actions/hero.actions';
 
+import { MaterialModule } from '../material.module';
+
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
@@ -30,7 +32,7 @@ export class HeroesComponent implements OnInit {
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    
+
     const nextId = this.heroIds.length > 0 ? Math.max(...this.heroIds) + 1 : 0;
     this.store.dispatch(new HeroActions.AddHero({ hero: { id: nextId, name: name } }))
   }

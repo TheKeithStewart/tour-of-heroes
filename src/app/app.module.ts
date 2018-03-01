@@ -1,5 +1,8 @@
+import 'hammerjs';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -23,9 +26,12 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './effects/app.effects';
 
+import { MaterialModule } from './material.module';
+
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -43,7 +49,8 @@ import { AppEffects } from './effects/app.effects';
       name: 'Tour of Heroes'
     }) : [],
 
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    MaterialModule
   ],
   declarations: [
     AppComponent,
