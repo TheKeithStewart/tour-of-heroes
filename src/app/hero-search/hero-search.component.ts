@@ -8,10 +8,12 @@ import { Hero } from './../models/hero.model';
 import * as fromHero from './../reducers';
 import * as HeroActions from './../actions/hero.actions';
 
+import { MaterialModule } from '../material.module';
+
 @Component({
   selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
-  styleUrls: [ './hero-search.component.css' ]
+  styleUrls: ['./hero-search.component.css']
 })
 export class HeroSearchComponent implements OnInit {
   heroes$: Observable<Hero[]>;
