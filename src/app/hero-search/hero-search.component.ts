@@ -28,6 +28,7 @@ export class HeroSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // TODO: use effects for this and write unit tests
     this.heroes$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),

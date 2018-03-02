@@ -25,6 +25,8 @@ export class HeroDetailComponent implements OnInit {
 
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
+
+    // TODO: use effects for this and write unit tests
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero);
   }
@@ -33,7 +35,8 @@ export class HeroDetailComponent implements OnInit {
     this.location.back();
   }
 
- save(): void {
+  save(): void {
+    // TODO: use effects for this and write unit tests
     this.heroService.updateHero(this.hero)
       .subscribe(() => this.goBack());
   }
