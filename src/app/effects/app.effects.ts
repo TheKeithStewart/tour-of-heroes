@@ -14,7 +14,11 @@ import {
   HeroActionTypes,
   GetHeroes,
   GetHeroesError,
-  LoadHeroes
+  LoadHeroes,
+  GetHero,
+  GetHeroSuccess,
+  GetHeroError,
+  UpsertHero
 } from './../actions/hero.actions';
 import { HeroService } from './../hero.service';
 
@@ -27,6 +31,17 @@ export class AppEffects {
     concatMap(() => this.heroService.getHeroes().pipe(
       map(heroes => new LoadHeroes({ heroes: heroes })),
       catchError(err => of(new GetHeroesError(err)))
+    ))
+  );
+
+  // TODO: unit tests
+  @Effect()
+  getHero$: Observable<Action> = this.actions$.pipe(
+    ofType<GetHero>(HeroActionTypes.GetHero),
+    map(action => action.payload),
+    concatMap(id => this.heroService.getHero(id).pipe(
+      map(hero => new GetHeroSuccess({ id, changes: hero })),
+      catchError(err => of(new GetHeroError(err)))
     ))
   );
 

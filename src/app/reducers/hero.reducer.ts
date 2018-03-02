@@ -5,14 +5,16 @@ import { HeroActions, HeroActionTypes } from './../actions/hero.actions';
 
 export interface State extends EntityState<Hero> {
   loading: boolean,
-  error: string
+  error: string,
+  selectedHeroId: number | null
 }
 
 export const adapter: EntityAdapter<Hero> = createEntityAdapter<Hero>();
 
 export const initialState: State = adapter.getInitialState({
   loading: false,
-  error: ''
+  error: '',
+  selectedHeroId: null
 });
 
 export function reducer(
@@ -24,17 +26,17 @@ export function reducer(
       return adapter.addOne(action.payload.hero, state);
     }
 
-    // case HeroActionTypes.UpsertHero: {
-    //   return adapter.upsertOne(action.payload.hero, state);
-    // }
+    case HeroActionTypes.UpsertHero: {
+      return adapter.upsertOne(action.payload.hero, state);
+    }
 
     case HeroActionTypes.AddHeroes: {
       return adapter.addMany(action.payload.heroes, state);
     }
 
-    // case HeroActionTypes.UpsertHeroes: {
-    //   return adapter.upsertMany(action.payload.heroes, state);
-    // }
+    case HeroActionTypes.UpsertHeroes: {
+      return adapter.upsertMany(action.payload.heroes, state);
+    }
 
     case HeroActionTypes.UpdateHero: {
       return adapter.updateOne(action.payload.hero, state);
@@ -76,6 +78,24 @@ export function reducer(
       }
     }
 
+    case HeroActionTypes.GetHero: {
+      return {
+        ...state,
+        loading: true,
+        error: ''
+      }
+    }
+
+    case HeroActionTypes.GetHeroSuccess: {
+      const id = <number>action.payload.id;
+
+      return {
+        ...adapter.upsertOne(action.payload, state),
+        loading: false,
+        selectedHeroId: id
+      }
+    }
+
     default: {
       return state;
     }
@@ -107,4 +127,16 @@ export const getTopHeroes = createSelector(
 export const getHeroIdState = createSelector(
   getHeroState,
   state => state.ids
+);
+
+export const getSelectedHeroId = createSelector(
+  getHeroState,
+  state => state.selectedHeroId
+);
+export const getSelectedHero = createSelector(
+  getHeroEntityState,
+  getSelectedHeroId,
+  (entities, selectedId) => {
+    return selectedId && entities[selectedId]
+  }
 );
