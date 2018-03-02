@@ -4,25 +4,15 @@ import { Hero } from './../models/hero.model';
 import { HeroActions, HeroActionTypes } from './../actions/hero.actions';
 
 export interface State extends EntityState<Hero> {
-  // additional entities state properties
+  loading: boolean,
+  error: string
 }
 
 export const adapter: EntityAdapter<Hero> = createEntityAdapter<Hero>();
 
 export const initialState: State = adapter.getInitialState({
-  ids: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-  entities: {
-    11: { id: 11, name: 'Mr. Nice' },
-    12: { id: 12, name: 'Narco' },
-    13: { id: 13, name: 'Bombasto' },
-    14: { id: 14, name: 'Celeritas' },
-    15: { id: 15, name: 'Magneta' },
-    16: { id: 16, name: 'RubberMan' },
-    17: { id: 17, name: 'Dynama' },
-    18: { id: 18, name: 'Dr IQ' },
-    19: { id: 19, name: 'Magma' },
-    20: { id: 20, name: 'Tornado' }  
-  }
+  loading: false,
+  error: ''
 });
 
 export function reducer(
@@ -68,6 +58,22 @@ export function reducer(
 
     case HeroActionTypes.ClearHeroes: {
       return adapter.removeAll(state);
+    }
+
+    case HeroActionTypes.GetHeroes: {
+      return {
+        ...state,
+        loading: true,
+        error: ''
+      }
+    }
+
+    case HeroActionTypes.GetHeroesError: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      }
     }
 
     default: {

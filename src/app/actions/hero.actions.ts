@@ -12,7 +12,9 @@ export enum HeroActionTypes {
   UpdateHeroes = '[Hero] Update Heroes',
   DeleteHero = '[Hero] Delete Hero',
   DeleteHeroes = '[Hero] Delete Heroes',
-  ClearHeroes = '[Hero] Clear Heroes'
+  ClearHeroes = '[Hero] Clear Heroes',
+  GetHeroes = '[Hero] Get Heroes',
+  GetHeroesError = '[Hero] Get Heroes Error'
 }
 
 export class LoadHeroes implements Action {
@@ -73,6 +75,16 @@ export class ClearHeroes implements Action {
   readonly type = HeroActionTypes.ClearHeroes;
 }
 
+export class GetHeroes implements Action {
+  readonly type = HeroActionTypes.GetHeroes;
+}
+
+export class GetHeroesError implements Action {
+  readonly type = HeroActionTypes.GetHeroesError;
+
+  constructor(public payload: string) {}
+}
+
 export type HeroActions =
  LoadHeroes
  | AddHero
@@ -83,4 +95,6 @@ export type HeroActions =
  | UpdateHeroes
  | DeleteHero
  | DeleteHeroes
- | ClearHeroes;
+ | ClearHeroes
+ | GetHeroes
+ | GetHeroesError;
