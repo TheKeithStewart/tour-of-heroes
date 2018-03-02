@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
 import { Hero } from './../models/hero.model';
-import { HeroService } from '../hero.service';
+import * as fromHero from './../reducers/hero.reducer';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +11,15 @@ import { HeroService } from '../hero.service';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  heroes: Hero[] = [];
+  heroes: Observable<Hero[]>;
 
-  constructor(private heroService: HeroService) { }
+  constructor(private store: Store<fromHero.State>) { }
 
   ngOnInit() {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
+    this.heroes = this.store.select(fromHero.getTopHeroes);
   }
 }

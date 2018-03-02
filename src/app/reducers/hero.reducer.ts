@@ -93,6 +93,10 @@ export const getAllHeroes = createSelector(
   getHeroEntityState,
   (entities) => Object.keys(entities).map(id => entities[id])
 );
+export const getTopHeroes = createSelector(
+  getAllHeroes,
+  (entities) => entities.slice(1, 5)
+);
 
 export const getHeroIdState = createSelector(
   getHeroState,
