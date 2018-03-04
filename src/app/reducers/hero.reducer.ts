@@ -39,7 +39,26 @@ export function reducer(
     }
 
     case HeroActionTypes.UpdateHero: {
-      return adapter.updateOne(action.payload.hero, state);
+      return {
+        ...state,
+        loading: true,
+        error: ''
+      };
+    }
+
+    case HeroActionTypes.UpdateHeroSuccess: {
+      return {
+        ...adapter.updateOne(action.payload.hero, state),
+        loading: false
+      };
+    }
+
+    case HeroActionTypes.UpdateHeroFail: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      }
     }
 
     case HeroActionTypes.UpdateHeroes: {

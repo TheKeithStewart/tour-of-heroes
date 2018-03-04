@@ -9,6 +9,8 @@ export enum HeroActionTypes {
   AddHeroes = '[Hero] Add Heroes',
   UpsertHeroes = '[Hero] Upsert Heroes',
   UpdateHero = '[Hero] Update Hero',
+  UpdateHeroSuccess = '[Hero] Update Hero Success',
+  UpdateHeroFail = '[Hero] Update Hero Fail',
   UpdateHeroes = '[Hero] Update Heroes',
   DeleteHero = '[Hero] Delete Hero',
   DeleteHeroes = '[Hero] Delete Heroes',
@@ -53,7 +55,19 @@ export class UpsertHeroes implements Action {
 export class UpdateHero implements Action {
   readonly type = HeroActionTypes.UpdateHero;
 
+  constructor(public payload: Hero) { }
+}
+
+export class UpdateHeroSuccess implements Action {
+  readonly type = HeroActionTypes.UpdateHeroSuccess;
+
   constructor(public payload: { hero: Update<Hero> }) { }
+}
+
+export class UpdateHeroFail implements Action {
+  readonly type = HeroActionTypes.UpdateHeroFail;
+
+  constructor(public payload: string) { }
 }
 
 export class UpdateHeroes implements Action {
@@ -113,6 +127,8 @@ export type HeroActions =
   | AddHeroes
   | UpsertHeroes
   | UpdateHero
+  | UpdateHeroSuccess
+  | UpdateHeroFail
   | UpdateHeroes
   | DeleteHero
   | DeleteHeroes

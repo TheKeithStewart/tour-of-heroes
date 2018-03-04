@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { tap, filter, take } from 'rxjs/operators';
 
 import { Hero } from './../models/hero.model';
 import * as fromHero from './../reducers/hero.reducer';
@@ -14,13 +13,9 @@ import * as HeroActions from './../actions/hero.actions';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
-  hero$: Observable<Hero>;
+  hero: Hero;
 
-  constructor(
-    private route: ActivatedRoute,
-    private location: Location,
-    private store: Store<fromHero.State>
-  ) { }
+  constructor(private route: ActivatedRoute, private store: Store<fromHero.State>) { }
 
   ngOnInit(): void {
     this.getHero();
@@ -30,16 +25,14 @@ export class HeroDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
 
     this.store.dispatch(new HeroActions.GetHero(id));
-    this.hero$ = this.store.select(fromHero.getSelectedHero);
-  }
-
-  goBack(): void {
-    this.location.back();
+    this.store.select(fromHero.getSelectedHero).pipe(
+      filter(hero => hero && hero.id === id),
+      take(1),
+      tap(hero => this.hero = { ...hero })
+    ).subscribe();
   }
 
   save(): void {
-    // TODO: use effects for this and write unit tests
-    // this.heroService.updateHero(this.hero)
-    //   .subscribe(() => this.goBack());
+    this.store.dispatch(new HeroActions.UpdateHero(this.hero));
   }
 }

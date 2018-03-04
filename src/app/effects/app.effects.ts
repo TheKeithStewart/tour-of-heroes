@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { 
   map,
   concatMap,
-  catchError
+  catchError,
+  tap
 } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';
@@ -18,7 +20,10 @@ import {
   GetHero,
   GetHeroSuccess,
   GetHeroError,
-  UpsertHero
+  UpsertHero,
+  UpdateHero,
+  UpdateHeroSuccess,
+  UpdateHeroFail
 } from './../actions/hero.actions';
 import { HeroService } from './../hero.service';
 
@@ -45,10 +50,28 @@ export class AppEffects {
     ))
   );
 
+  // TODO: unit tests
+  @Effect()
+  updateHero$: Observable<Action> = this.actions$.pipe(
+    ofType<UpdateHero>(HeroActionTypes.UpdateHero),
+    concatMap(action => this.heroService.updateHero(action.payload).pipe(
+      map(() => {
+        const hero = action.payload;
+        return new UpdateHeroSuccess({ hero: { id: hero.id, changes: hero } })
+      }),
+      tap(() => this.location.back()),
+      catchError(err => of(new UpdateHeroFail(err)))
+    ))
+  );
+
   // Should be your last effect
   @Effect() init$: Observable<Action> = defer(() => {
     return of(new GetHeroes())
   });
 
-  constructor(private actions$: Actions, private heroService: HeroService) {}
+  constructor(
+    private actions$: Actions,
+    private heroService: HeroService,
+    private location: Location
+  ) {}
 }
