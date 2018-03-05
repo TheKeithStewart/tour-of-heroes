@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { Hero } from './../models/hero.model';
-import * as fromHero from './../reducers/hero.reducer';
+import * as fromHero from './../reducers';
 import * as HeroActions from './../actions/hero.actions';
 
 @Component({

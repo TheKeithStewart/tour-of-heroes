@@ -121,41 +121,4 @@ export function reducer(
   }
 }
 
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();
-
-export const getHeroState = createFeatureSelector<State>('heroes');
-
-export const getHeroEntityState = createSelector(
-  getHeroState,
-  state => state.entities
-);
-export const getAllHeroes = createSelector(
-  getHeroEntityState,
-  (entities) => Object.keys(entities).map(id => entities[id])
-);
-export const getTopHeroes = createSelector(
-  getAllHeroes,
-  (entities) => entities.slice(1, 5)
-);
-
-export const getHeroIdState = createSelector(
-  getHeroState,
-  state => state.ids
-);
-
-export const getSelectedHeroId = createSelector(
-  getHeroState,
-  state => state.selectedHeroId
-);
-export const getSelectedHero = createSelector(
-  getHeroEntityState,
-  getSelectedHeroId,
-  (entities, selectedId) => {
-    return selectedId && entities[selectedId]
-  }
-);
+export const getSelectedHeroId = (state: State) => state.selectedHeroId;

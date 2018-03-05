@@ -57,3 +57,5 @@ export function reducer(state = initialState, action: HeroActions): State {
       return state;
   }
 }
+
+export const getIds = (state: State) => state.ids;
