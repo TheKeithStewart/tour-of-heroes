@@ -33,6 +33,7 @@ export class HeroesComponent implements OnInit {
     if (!name) { return; }
     
     const nextId = this.heroIds.length > 0 ? Math.max(...this.heroIds) + 1 : 0;
+    // TODO: add effect and unit tests around adding a hero (#9)
     this.store.dispatch(new HeroActions.AddHero({ hero: { id: nextId, name: name } }))
   }
 
