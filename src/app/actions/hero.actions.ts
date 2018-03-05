@@ -3,7 +3,6 @@ import { Update } from '@ngrx/entity';
 import { Hero } from './../models/hero.model';
 
 export enum HeroActionTypes {
-  LoadHeroes = '[Hero] Load Heroes',
   AddHero = '[Hero] Add Hero',
   UpsertHero = '[Hero] Upsert Hero',
   AddHeroes = '[Hero] Add Heroes',
@@ -15,20 +14,15 @@ export enum HeroActionTypes {
   DeleteHero = '[Hero] Delete Hero',
   DeleteHeroes = '[Hero] Delete Heroes',
   ClearHeroes = '[Hero] Clear Heroes',
-  GetHeroes = '[Hero] Get Heroes',
-  GetHeroesError = '[Hero] Get Heroes Error',
+  LoadHeroes = '[Hero] Load Heroes',
+  LoadHeroesSuccess = '[Hero] Load Heroes Success',
+  LoadHeroesError = '[Hero] Load Heroes Error',
   GetHero = '[Hero] Get Hero',
   GetHeroSuccess = '[Hero] Get Hero Success',
   GetHeroError = '[Hero] Get Hero Error',
   Search = '[Hero] Search',
   SearchSuccess = '[Hero] Search Success',
   SearchFail = '[Hero] Search Fail'
-}
-
-export class LoadHeroes implements Action {
-  readonly type = HeroActionTypes.LoadHeroes;
-
-  constructor(public payload: { heroes: Hero[] }) { }
 }
 
 export class AddHero implements Action {
@@ -95,12 +89,18 @@ export class ClearHeroes implements Action {
   readonly type = HeroActionTypes.ClearHeroes;
 }
 
-export class GetHeroes implements Action {
-  readonly type = HeroActionTypes.GetHeroes;
+export class LoadHeroes implements Action {
+  readonly type = HeroActionTypes.LoadHeroes;
 }
 
-export class GetHeroesError implements Action {
-  readonly type = HeroActionTypes.GetHeroesError;
+export class LoadHeroesSuccess implements Action {
+  readonly type = HeroActionTypes.LoadHeroesSuccess;
+
+  constructor(public payload: { heroes: Hero[] }) { }
+}
+
+export class LoadHeroesError implements Action {
+  readonly type = HeroActionTypes.LoadHeroesError;
 
   constructor(public payload: string) { }
 }
@@ -142,7 +142,7 @@ export class SearchFail implements Action {
 }
 
 export type HeroActions =
-  LoadHeroes
+  LoadHeroesSuccess
   | AddHero
   | UpsertHero
   | AddHeroes
@@ -154,8 +154,8 @@ export type HeroActions =
   | DeleteHero
   | DeleteHeroes
   | ClearHeroes
-  | GetHeroes
-  | GetHeroesError
+  | LoadHeroes
+  | LoadHeroesError
   | GetHero
   | GetHeroSuccess
   | GetHeroError

@@ -16,9 +16,9 @@ import { defer } from 'rxjs/observable/defer';
 
 import {
   HeroActionTypes,
-  GetHeroes,
-  GetHeroesError,
   LoadHeroes,
+  LoadHeroesError,
+  LoadHeroesSuccess,
   GetHero,
   GetHeroSuccess,
   GetHeroError,
@@ -36,11 +36,11 @@ import { HeroService } from './../hero.service';
 export class AppEffects {
   // TODO: unit tests
   @Effect()
-  getHeroes$: Observable<Action> = this.actions$.pipe(
-    ofType<GetHeroes>(HeroActionTypes.GetHeroes),
+  loadHeroes$: Observable<Action> = this.actions$.pipe(
+    ofType<LoadHeroes>(HeroActionTypes.LoadHeroes),
     concatMap(() => this.heroService.getHeroes().pipe(
-      map(heroes => new LoadHeroes({ heroes: heroes })),
-      catchError(err => of(new GetHeroesError(err)))
+      map(heroes => new LoadHeroesSuccess({ heroes: heroes })),
+      catchError(err => of(new LoadHeroesError(err)))
     ))
   );
 
@@ -83,7 +83,7 @@ export class AppEffects {
 
   // Should be your last effect
   @Effect() init$: Observable<Action> = defer(() => {
-    return of(new GetHeroes())
+    return of(new LoadHeroes())
   });
 
   constructor(

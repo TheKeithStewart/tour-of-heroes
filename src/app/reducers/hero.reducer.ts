@@ -73,7 +73,7 @@ export function reducer(
       return adapter.removeMany(action.payload.ids, state);
     }
 
-    case HeroActionTypes.LoadHeroes: {
+    case HeroActionTypes.LoadHeroesSuccess: {
       return adapter.addAll(action.payload.heroes, state);
     }
 
@@ -81,7 +81,7 @@ export function reducer(
       return adapter.removeAll(state);
     }
 
-    case HeroActionTypes.GetHeroes: {
+    case HeroActionTypes.LoadHeroes: {
       return {
         ...state,
         loading: true,
@@ -89,7 +89,7 @@ export function reducer(
       }
     }
 
-    case HeroActionTypes.GetHeroesError: {
+    case HeroActionTypes.LoadHeroesError: {
       return {
         ...state,
         loading: false,
