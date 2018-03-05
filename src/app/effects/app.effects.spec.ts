@@ -1,8 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Observable';
 
 import { AppEffects } from './app.effects';
+import { HeroService } from './../hero.service';
+
+class MockHeroService { }
 
 describe('AppService', () => {
   let actions$: Observable<any>;
@@ -12,7 +16,11 @@ describe('AppService', () => {
     TestBed.configureTestingModule({
       providers: [
         AppEffects,
-        provideMockActions(() => actions$)
+        provideMockActions(() => actions$),
+        { provide: HeroService, useClass: MockHeroService }
+      ],
+      imports: [
+        RouterTestingModule
       ]
     });
 
