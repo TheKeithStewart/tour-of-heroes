@@ -128,7 +128,7 @@ export const {
   selectTotal,
 } = adapter.getSelectors();
 
-export const getHeroState = createFeatureSelector<State>('hero');
+export const getHeroState = createFeatureSelector<State>('heroes');
 
 export const getHeroEntityState = createSelector(
   getHeroState,

@@ -19,7 +19,10 @@ export enum HeroActionTypes {
   GetHeroesError = '[Hero] Get Heroes Error',
   GetHero = '[Hero] Get Hero',
   GetHeroSuccess = '[Hero] Get Hero Success',
-  GetHeroError = '[Hero] Get Hero Error'
+  GetHeroError = '[Hero] Get Hero Error',
+  Search = '[Hero] Search',
+  SearchSuccess = '[Hero] Search Success',
+  SearchFail = '[Hero] Search Fail'
 }
 
 export class LoadHeroes implements Action {
@@ -120,6 +123,24 @@ export class GetHeroError implements Action {
   constructor(public payload: string) { }
 }
 
+export class Search implements Action {
+  readonly type = HeroActionTypes.Search;
+
+  constructor(public payload: string) { }
+}
+
+export class SearchSuccess implements Action {
+  readonly type = HeroActionTypes.SearchSuccess;
+
+  constructor(public payload: Hero[]) { }
+}
+
+export class SearchFail implements Action {
+  readonly type = HeroActionTypes.SearchFail;
+
+  constructor(public payload: string) { }
+}
+
 export type HeroActions =
   LoadHeroes
   | AddHero
@@ -137,4 +158,7 @@ export type HeroActions =
   | GetHeroesError
   | GetHero
   | GetHeroSuccess
-  | GetHeroError;
+  | GetHeroError
+  | Search
+  | SearchSuccess
+  | SearchFail;

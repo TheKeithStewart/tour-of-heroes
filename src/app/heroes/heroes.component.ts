@@ -12,7 +12,7 @@ import * as HeroActions from './../actions/hero.actions';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Observable<Hero[]>;
+  heroes$: Observable<Hero[]>;
   heroIds: number[] = [];
 
   constructor(private store: Store<fromHero.State>) { }
@@ -22,7 +22,8 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroes = this.store.select(fromHero.getAllHeroes);
+    this.heroes$ = this.store.select(fromHero.getAllHeroes);
+    // TODO: need to manage this subscription better (#7)
     this.store.select(fromHero.getHeroIdState)
       .subscribe((ids: number[]) => this.heroIds = ids);
   }

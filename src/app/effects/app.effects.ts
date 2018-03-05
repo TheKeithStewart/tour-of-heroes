@@ -7,7 +7,9 @@ import {
   map,
   concatMap,
   catchError,
-  tap
+  tap,
+  debounceTime,
+  distinctUntilChanged
 } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';
@@ -23,7 +25,10 @@ import {
   UpsertHero,
   UpdateHero,
   UpdateHeroSuccess,
-  UpdateHeroFail
+  UpdateHeroFail,
+  Search,
+  SearchSuccess,
+  SearchFail
 } from './../actions/hero.actions';
 import { HeroService } from './../hero.service';
 
@@ -61,6 +66,18 @@ export class AppEffects {
       }),
       tap(() => this.location.back()),
       catchError(err => of(new UpdateHeroFail(err)))
+    ))
+  );
+
+  // TODO: unit tests
+  @Effect()
+  search$: Observable<Action> = this.actions$.pipe(
+    ofType<Search>(HeroActionTypes.Search),
+    debounceTime(300),
+    distinctUntilChanged(),
+    concatMap((action: Search) => this.heroService.searchHeroes(action.payload).pipe(
+      map(heroes => new SearchSuccess(heroes)),
+      catchError(err => of(new SearchFail(err)))
     ))
   );
 
