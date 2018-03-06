@@ -53,7 +53,6 @@ export class AppEffects {
     ))
   );
 
-  // TODO: unit tests
   @Effect()
   updateHero$: Observable<Action> = this.actions$.pipe(
     ofType<UpdateHero>(HeroActionTypes.UpdateHero),

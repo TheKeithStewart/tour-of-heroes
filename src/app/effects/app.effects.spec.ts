@@ -1,5 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SpyLocation } from '@angular/common/testing';
+import { Location } from '@angular/common';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Actions } from '@ngrx/effects';
 import { cold, hot, getTestScheduler } from 'jasmine-marbles';
@@ -15,7 +17,10 @@ import {
   LoadHeroesFail,
   GetHero,
   GetHeroSuccess,
-  GetHeroFail
+  GetHeroFail,
+  UpdateHero,
+  UpdateHeroSuccess,
+  UpdateHeroFail
 } from './../actions/hero.actions';
 
 export class TestActions extends Actions {
@@ -35,12 +40,14 @@ export function getActions() {
 class MockHeroService {
   getHeroes = jasmine.createSpy('getHeroes');
   getHero = jasmine.createSpy('getHero');
+  updateHero = jasmine.createSpy('updateHero');
 }
 
 describe('AppService', () => {
   let actions$: TestActions;
   let effects: AppEffects;
   let heroService: any;
+  let location: SpyLocation;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -49,6 +56,7 @@ describe('AppService', () => {
         provideMockActions(() => actions$),
         { provide: HeroService, useClass: MockHeroService },
         { provide: Actions, useFactory: getActions },
+
       ],
       imports: [
         RouterTestingModule
@@ -58,6 +66,7 @@ describe('AppService', () => {
     effects = TestBed.get(AppEffects);
     heroService = TestBed.get(HeroService);
     actions$ = TestBed.get(Actions);
+    location = TestBed.get(Location);
   });
 
   describe('loadHeroes$', () => {
@@ -76,7 +85,7 @@ describe('AppService', () => {
       expect(effects.loadHeroes$).toBeObservable(expected);
     });
 
-    it('should return a LoadHeroesFail if an error is thrown', () => {
+    it('should return a LoadHeroesFail if there is a failure', () => {
       const action = new LoadHeroes();
       const error = 'Epic fail!!!';
       const completion = new LoadHeroesFail(error);
@@ -91,8 +100,9 @@ describe('AppService', () => {
   });
 
   describe('getHero$', () => {
+    const hero = { id: 1, name: 'test1' } as Hero;
+
     it('should return a GetHeroSuccess, with a hero, after success', () => {
-      const hero = { id: 1, name: 'test1' } as Hero;
       const action = new GetHero(hero.id);
       const completion = new GetHeroSuccess({ id: hero.id, changes: hero });
 
@@ -104,8 +114,7 @@ describe('AppService', () => {
       expect(effects.getHero$).toBeObservable(expected);
     });
 
-    it('should return a GetHeroFail if an error is thrown', () => {
-      const hero = { id: 1, name: 'test1' } as Hero;
+    it('should return a GetHeroFail if there is a failure', () => {
       const action = new GetHero(hero.id);
       const error = 'Oh noooooooo!!!';
       const completion = new GetHeroFail(error);
@@ -116,6 +125,37 @@ describe('AppService', () => {
       heroService.getHero.and.returnValue(response);
 
       expect(effects.getHero$).toBeObservable(expected);
+    });
+  });
+
+  describe('updateHero$', () => {
+    const hero = { id: 1, name: 'test1' } as Hero;
+
+    it('should return an UpdateHeroSuccess, with the hero changes, and navigate back after success', () => {
+      location.back = jasmine.createSpy('back');
+      const action = new UpdateHero(hero);
+      const completion = new UpdateHeroSuccess({ hero: { id: hero.id, changes: hero } });
+
+      actions$.stream = hot('-a', { a: action });
+      const response = cold('-b|', { b: hero });
+      const expected = cold('--c', { c: completion });
+      heroService.updateHero.and.returnValue(response);
+
+      expect(effects.updateHero$).toBeObservable(expected);
+      expect(location.back).toHaveBeenCalled();
+    });
+
+    it('should return an UpdateHeroFail if there is a failure', () => {
+      const action = new UpdateHero(hero);
+      const error = 'This is very, very bad';
+      const completion = new UpdateHeroFail(error);
+
+      actions$.stream = hot('-a', { a: action });
+      const response = cold('-#', {}, error);
+      const expected = cold('--b', { b: completion });
+      heroService.updateHero.and.returnValue(response);
+
+      expect(effects.updateHero$).toBeObservable(expected);
     });
   });
 });
