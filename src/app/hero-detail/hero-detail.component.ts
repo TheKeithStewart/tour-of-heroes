@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { tap, filter, take } from 'rxjs/operators';
 
 import { Hero } from './../models/hero.model';
+
+import { MaterialModule } from '../material.module';
 import * as fromHero from './../reducers';
 import * as HeroActions from './../actions/hero.actions';
 
@@ -15,7 +17,11 @@ import * as HeroActions from './../actions/hero.actions';
 export class HeroDetailComponent implements OnInit {
   hero: Hero;
 
-  constructor(private route: ActivatedRoute, private store: Store<fromHero.State>) { }
+
+  constructor(private route: ActivatedRoute,
+              private store: Store<fromHero.State>,
+              private heroService: HeroService,
+              private location: Location) { }
 
   ngOnInit(): void {
     this.getHero();
