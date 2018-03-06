@@ -14,20 +14,7 @@ export const adapter: EntityAdapter<Hero> = createEntityAdapter<Hero>();
 export const initialState: State = adapter.getInitialState({
   loading: false,
   error: '',
-  selectedHeroId: null,
-  ids: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-  entities: {
-    11: { id: 11, name: 'Madonna' },
-    12: { id: 12, name: 'Micheal Jackson' },
-    13: { id: 13, name: 'Axel Rose' },
-    14: { id: 14, name: 'Susanna Hoffs' },
-    15: { id: 15, name: 'Debbie Harry' },
-    16: { id: 16, name: 'David Bowie' },
-    17: { id: 17, name: 'Mick Jagger' },
-    18: { id: 18, name: 'Stevie Nicks' },
-    19: { id: 19, name: 'Elton John' },
-    20: { id: 20, name: 'James Hetfield' }
-  }
+  selectedHeroId: null
 });
 
 export function reducer(
