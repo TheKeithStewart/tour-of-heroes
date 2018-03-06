@@ -6,6 +6,7 @@ import { tap, filter, take } from 'rxjs/operators';
 import { Hero } from './../models/hero.model';
 import * as fromHero from './../reducers';
 import * as HeroActions from './../actions/hero.actions';
+import { MaterialModule } from '../material.module';
 
 @Component({
   selector: 'app-hero-detail',

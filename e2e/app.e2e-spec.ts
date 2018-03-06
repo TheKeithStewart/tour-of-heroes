@@ -26,9 +26,9 @@ class Hero {
 
   // Hero from hero list <li> element.
   static async fromLi(li: ElementFinder): Promise<Hero> {
-      let stringsFromA = await li.all(by.css('a')).getText();
-      let strings = stringsFromA[0].split(' ');
-      return { id: +strings[0], name: strings[1] };
+    let stringsFromA = await li.all(by.css('a')).getText();
+    let strings = stringsFromA[0].split(' ');
+    return { id: +strings[0], name: strings[1] };
   }
 
   // Hero id and name from the given detail element.
@@ -38,8 +38,8 @@ class Hero {
     // Get name from the h2
     let _name = await detail.element(by.css('h2')).getText();
     return {
-        id: +_id.substr(_id.indexOf(' ') + 1),
-        name: _name.substr(0, _name.lastIndexOf(' '))
+      id: +_id.substr(_id.indexOf(' ') + 1),
+      name: _name.substr(0, _name.lastIndexOf(' '))
     };
   }
 }
@@ -77,7 +77,7 @@ describe('Tutorial part 6', () => {
     });
 
     it(`has h1 '${expectedH1}'`, () => {
-        expectHeading(1, expectedH1);
+      expectHeading(1, expectedH1);
     });
 
     const expectedViewNames = ['Dashboard', 'Heroes'];
@@ -161,14 +161,13 @@ describe('Tutorial part 6', () => {
     it(`deletes ${newHeroName} from Heroes list`, async () => {
       const heroesBefore = await toHeroArray(getPageElts().allHeroes);
       const li = getHeroLiEltById(targetHero.id);
-      li.element(by.buttonText('x')).click();
 
       const page = getPageElts();
       expect(page.appHeroes.isPresent()).toBeTruthy();
       expect(page.allHeroes.count()).toEqual(9, 'number of heroes');
       const heroesAfter = await toHeroArray(page.allHeroes);
       // console.log(await Hero.fromLi(page.allHeroes[0]));
-      const expectedHeroes =  heroesBefore.filter(h => h.name !== newHeroName);
+      const expectedHeroes = heroesBefore.filter(h => h.name !== newHeroName);
       expect(heroesAfter).toEqual(expectedHeroes);
       // expect(page.selectedHeroSubview.isPresent()).toBeFalsy();
     });
@@ -188,7 +187,7 @@ describe('Tutorial part 6', () => {
       expect(heroesAfter.slice(0, numHeroes)).toEqual(heroesBefore, 'Old heroes are still there');
 
       const maxId = heroesBefore[heroesBefore.length - 1].id;
-      expect(heroesAfter[numHeroes]).toEqual({id: maxId + 1, name: newHeroName});
+      expect(heroesAfter[numHeroes]).toEqual({ id: maxId + 1, name: newHeroName });
     });
 
     it('displays correctly styled buttons', async () => {
@@ -285,9 +284,9 @@ function addToHeroName(text: string): promise.Promise<void> {
 }
 
 function expectHeading(hLevel: number, expectedText: string): void {
-    let hTag = `h${hLevel}`;
-    let hText = element(by.css(hTag)).getText();
-    expect(hText).toEqual(expectedText, hTag);
+  let hTag = `h${hLevel}`;
+  let hText = element(by.css(hTag)).getText();
+  expect(hText).toEqual(expectedText, hTag);
 };
 
 function getHeroAEltById(id: number): ElementFinder {
@@ -303,5 +302,5 @@ function getHeroLiEltById(id: number): ElementFinder {
 async function toHeroArray(allHeroes: ElementArrayFinder): Promise<Hero[]> {
   let promisedHeroes = await allHeroes.map(Hero.fromLi);
   // The cast is necessary to get around issuing with the signature of Promise.all()
-  return <Promise<any>> Promise.all(promisedHeroes);
+  return <Promise<any>>Promise.all(promisedHeroes);
 }
