@@ -12,7 +12,10 @@ import { Hero } from './../models/hero.model';
 import {
   LoadHeroes,
   LoadHeroesSuccess,
-  LoadHeroesFail
+  LoadHeroesFail,
+  GetHero,
+  GetHeroSuccess,
+  GetHeroFail
 } from './../actions/hero.actions';
 
 export class TestActions extends Actions {
@@ -31,6 +34,7 @@ export function getActions() {
 
 class MockHeroService {
   getHeroes = jasmine.createSpy('getHeroes');
+  getHero = jasmine.createSpy('getHero');
 }
 
 describe('AppService', () => {
@@ -83,6 +87,35 @@ describe('AppService', () => {
       heroService.getHeroes.and.returnValue(response);
 
       expect(effects.loadHeroes$).toBeObservable(expected);
+    });
+  });
+
+  describe('getHero$', () => {
+    it('should return a GetHeroSuccess, with a hero, after success', () => {
+      const hero = { id: 1, name: 'test1' } as Hero;
+      const action = new GetHero(hero.id);
+      const completion = new GetHeroSuccess({ id: hero.id, changes: hero });
+
+      actions$.stream = hot('-a', { a: action });
+      const response = cold('-b|', { b: hero });
+      const expected = cold('--c', { c: completion });
+      heroService.getHero.and.returnValue(response);
+
+      expect(effects.getHero$).toBeObservable(expected);
+    });
+
+    it('should return a GetHeroFail if an error is thrown', () => {
+      const hero = { id: 1, name: 'test1' } as Hero;
+      const action = new GetHero(hero.id);
+      const error = 'Oh noooooooo!!!';
+      const completion = new GetHeroFail(error);
+
+      actions$.stream = hot('-a', { a: action });
+      const response = cold('-#', {}, error);
+      const expected = cold('--b', { b: completion });
+      heroService.getHero.and.returnValue(response);
+
+      expect(effects.getHero$).toBeObservable(expected);
     });
   });
 });
