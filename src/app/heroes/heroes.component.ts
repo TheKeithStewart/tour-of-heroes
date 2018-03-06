@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { Hero } from './../models/hero.model';
-import * as fromHero from './../reducers/hero.reducer';
+import * as fromHero from './../reducers';
 import * as HeroActions from './../actions/hero.actions';
 
 import { MaterialModule } from '../material.module';
@@ -14,7 +14,7 @@ import { MaterialModule } from '../material.module';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Observable<Hero[]>;
+  heroes$: Observable<Hero[]>;
   heroIds: number[] = [];
 
   constructor(private store: Store<fromHero.State>) { }
@@ -24,7 +24,8 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroes = this.store.select(fromHero.getAllHeroes);
+    this.heroes$ = this.store.select(fromHero.getAllHeroes);
+    // TODO: need to manage this subscription better (#7)
     this.store.select(fromHero.getHeroIdState)
       .subscribe((ids: number[]) => this.heroIds = ids);
   }
@@ -34,6 +35,7 @@ export class HeroesComponent implements OnInit {
     if (!name) { return; }
 
     const nextId = this.heroIds.length > 0 ? Math.max(...this.heroIds) + 1 : 0;
+    // TODO: add effect and unit tests around adding a hero (#9)
     this.store.dispatch(new HeroActions.AddHero({ hero: { id: nextId, name: name } }))
   }
 

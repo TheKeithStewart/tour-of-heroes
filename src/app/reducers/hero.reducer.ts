@@ -4,7 +4,9 @@ import { Hero } from './../models/hero.model';
 import { HeroActions, HeroActionTypes } from './../actions/hero.actions';
 
 export interface State extends EntityState<Hero> {
-  // additional entities state properties
+  loading: boolean,
+  error: string,
+  selectedHeroId: number | null
 }
 
 export const adapter: EntityAdapter<Hero> = createEntityAdapter<Hero>();
@@ -23,6 +25,11 @@ export const initialState: State = adapter.getInitialState({
     19: { id: 19, name: 'Elton John' },
     20: { id: 20, name: 'James Hetfield' }
   }
+
+  loading: false,
+  error: '',
+  selectedHeroId: null
+
 });
 
 export function reducer(
@@ -34,20 +41,39 @@ export function reducer(
       return adapter.addOne(action.payload.hero, state);
     }
 
-    // case HeroActionTypes.UpsertHero: {
-    //   return adapter.upsertOne(action.payload.hero, state);
-    // }
+    case HeroActionTypes.UpsertHero: {
+      return adapter.upsertOne(action.payload.hero, state);
+    }
 
     case HeroActionTypes.AddHeroes: {
       return adapter.addMany(action.payload.heroes, state);
     }
 
-    // case HeroActionTypes.UpsertHeroes: {
-    //   return adapter.upsertMany(action.payload.heroes, state);
-    // }
+    case HeroActionTypes.UpsertHeroes: {
+      return adapter.upsertMany(action.payload.heroes, state);
+    }
 
     case HeroActionTypes.UpdateHero: {
-      return adapter.updateOne(action.payload.hero, state);
+      return {
+        ...state,
+        loading: true,
+        error: ''
+      };
+    }
+
+    case HeroActionTypes.UpdateHeroSuccess: {
+      return {
+        ...adapter.updateOne(action.payload.hero, state),
+        loading: false
+      };
+    }
+
+    case HeroActionTypes.UpdateHeroFail: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      }
     }
 
     case HeroActionTypes.UpdateHeroes: {
@@ -62,12 +88,46 @@ export function reducer(
       return adapter.removeMany(action.payload.ids, state);
     }
 
-    case HeroActionTypes.LoadHeroes: {
+    case HeroActionTypes.LoadHeroesSuccess: {
       return adapter.addAll(action.payload.heroes, state);
     }
 
     case HeroActionTypes.ClearHeroes: {
       return adapter.removeAll(state);
+    }
+
+    case HeroActionTypes.LoadHeroes: {
+      return {
+        ...state,
+        loading: true,
+        error: ''
+      }
+    }
+
+    case HeroActionTypes.LoadHeroesError: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      }
+    }
+
+    case HeroActionTypes.GetHero: {
+      return {
+        ...state,
+        loading: true,
+        error: ''
+      }
+    }
+
+    case HeroActionTypes.GetHeroSuccess: {
+      const id = <number>action.payload.id;
+
+      return {
+        ...adapter.upsertOne(action.payload, state),
+        loading: false,
+        selectedHeroId: id
+      }
     }
 
     default: {
@@ -76,25 +136,4 @@ export function reducer(
   }
 }
 
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();
-
-export const getHeroState = createFeatureSelector<State>('hero');
-
-export const getHeroEntityState = createSelector(
-  getHeroState,
-  state => state.entities
-);
-export const getAllHeroes = createSelector(
-  getHeroEntityState,
-  (entities) => Object.keys(entities).map(id => entities[id])
-);
-
-export const getHeroIdState = createSelector(
-  getHeroState,
-  state => state.ids
-);
+export const getSelectedHeroId = (state: State) => state.selectedHeroId;

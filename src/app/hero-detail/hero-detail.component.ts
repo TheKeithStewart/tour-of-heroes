@@ -1,11 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { tap, filter, take } from 'rxjs/operators';
 
 import { Hero } from './../models/hero.model';
-import { HeroService } from '../hero.service';
 
 import { MaterialModule } from '../material.module';
+import * as fromHero from './../reducers';
+import * as HeroActions from './../actions/hero.actions';
 
 @Component({
   selector: 'app-hero-detail',
@@ -13,13 +15,13 @@ import { MaterialModule } from '../material.module';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
-  @Input() hero: Hero;
+  hero: Hero;
 
-  constructor(
-    private route: ActivatedRoute,
-    private heroService: HeroService,
-    private location: Location
-  ) { }
+
+  constructor(private route: ActivatedRoute,
+              private store: Store<fromHero.State>,
+              private heroService: HeroService,
+              private location: Location) { }
 
   ngOnInit(): void {
     this.getHero();
@@ -27,16 +29,16 @@ export class HeroDetailComponent implements OnInit {
 
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.heroService.getHero(id)
-      .subscribe(hero => this.hero = hero);
-  }
 
-  goBack(): void {
-    this.location.back();
+    this.store.dispatch(new HeroActions.GetHero(id));
+    this.store.select(fromHero.getSelectedHero).pipe(
+      filter(hero => hero && hero.id === id),
+      take(1),
+      tap(hero => this.hero = { ...hero })
+    ).subscribe();
   }
 
   save(): void {
-    this.heroService.updateHero(this.hero)
-      .subscribe(() => this.goBack());
+    this.store.dispatch(new HeroActions.UpdateHero(this.hero));
   }
 }
