@@ -12,7 +12,7 @@ import { Hero } from './../models/hero.model';
 import {
   LoadHeroes,
   LoadHeroesSuccess,
-  LoadHeroesError
+  LoadHeroesFail
 } from './../actions/hero.actions';
 
 export class TestActions extends Actions {
@@ -72,10 +72,10 @@ describe('AppService', () => {
       expect(effects.loadHeroes$).toBeObservable(expected);
     });
 
-    it('should return a LoadHeroesError if an error is thrown', () => {
+    it('should return a LoadHeroesFail if an error is thrown', () => {
       const action = new LoadHeroes();
       const error = 'Epic fail!!!';
-      const completion = new LoadHeroesError(error);
+      const completion = new LoadHeroesFail(error);
 
       actions$.stream = hot('-a', { a: action });
       const response = cold('-#', {}, error);
