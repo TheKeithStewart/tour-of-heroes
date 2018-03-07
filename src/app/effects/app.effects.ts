@@ -66,7 +66,6 @@ export class AppEffects {
     ))
   );
 
-  // TODO: unit tests
   @Effect()
   search$: Observable<Action> = this.actions$.pipe(
     ofType<Search>(HeroActionTypes.Search),
