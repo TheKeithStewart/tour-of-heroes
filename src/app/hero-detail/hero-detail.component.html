@@ -7,6 +7,27 @@
       <input [(ngModel)]="hero.name" placeholder="name" />
     </label>
   </div>
+  <hr>
+  <div>
+    <label>Moonwalk Rating:
+      <input type="number" [(ngModel)]="ratings.moonwalk" placeholder="moonwalk" />
+    </label>
+  </div>
+  <div>
+    <label>Sprinkler Rating:
+      <input type="number" [(ngModel)]="ratings.sprinkler" placeholder="sprinkler" />
+    </label>
+  </div>
+  <div>
+    <label>Worm Rating:
+      <input type="number" [(ngModel)]="ratings.worm" placeholder="worm" />
+    </label>
+  </div>
+  <div>
+    <label>Disco Rating:
+      <input type="number" [(ngModel)]="ratings.disco" placeholder="disco" />
+    </label>
+  </div>
   <button mat-raised-button (click)="goBack()">go back</button>
   <button mat-raised-button (click)="save()">save</button>
 </div>
