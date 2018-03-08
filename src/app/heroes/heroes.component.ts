@@ -36,7 +36,16 @@ export class HeroesComponent implements OnInit {
 
     const nextId = this.heroIds.length > 0 ? Math.max(...this.heroIds) + 1 : 0;
     // TODO: add effect and unit tests around adding a hero (#9)
-    this.store.dispatch(new HeroActions.AddHero({ hero: { id: nextId, name: name } }))
+    this.store.dispatch(new HeroActions.AddHero({ hero: {
+      id: nextId,
+      name: name,
+      ratings: {
+        moonwalk: 1,
+        sprinkler: 1,
+        worm: 1,
+        disco: 1
+      }
+    } }));
   }
 
   delete(hero: Hero): void {
