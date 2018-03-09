@@ -89,7 +89,7 @@ export function reducer(
       }
     }
 
-    case HeroActionTypes.LoadHeroesError: {
+    case HeroActionTypes.LoadHeroesFail: {
       return {
         ...state,
         loading: false,

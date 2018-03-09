@@ -16,6 +16,13 @@ import { MaterialModule } from '../material.module';
 })
 export class HeroDetailComponent implements OnInit {
   hero: Hero;
+  
+  ratings: {
+    moonwalk: number;
+    sprinkler: number;
+    worm: number;
+    disco: number;
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +40,10 @@ export class HeroDetailComponent implements OnInit {
     this.store.select(fromHero.getSelectedHero).pipe(
       filter(hero => hero && hero.id === id),
       take(1),
-      tap(hero => this.hero = { ...hero })
+      tap(hero => {
+        this.hero = { ...hero };
+        this.ratings = { ...hero.ratings };
+      })
     ).subscribe();
   }
 
@@ -42,6 +52,12 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.store.dispatch(new HeroActions.UpdateHero(this.hero));
+    const hero: Hero = {
+      ...this.hero,
+      ratings: {
+        ...this.ratings
+      }
+    };
+    this.store.dispatch(new HeroActions.UpdateHero(hero));
   }
 }
