@@ -4,6 +4,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
+
 import { NgModule } from "@angular/core";
 
 @NgModule({
@@ -14,9 +17,11 @@ import { NgModule } from "@angular/core";
         MatToolbarModule,
         MatCardModule,
         MatMenuModule,
+        MatGridListModule,
         MatDialogModule,
         MatInputModule,
-        MatIconModule
+        MatIconModule,
+        MatTableModule
     ]
 })
 export class MaterialModule { }

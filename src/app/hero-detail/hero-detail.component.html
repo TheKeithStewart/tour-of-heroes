@@ -1,33 +1,41 @@
 <div *ngIf="hero">
-  <h2>{{ hero.name | uppercase }} Details</h2>
+  <h2>{{ hero.name }} Details</h2>
   <div>
     <span>id: </span>{{hero.id}}</div>
+
   <div>
-    <label>name:
-      <input [(ngModel)]="hero.name" placeholder="name" />
-    </label>
+    <mat-form-field>
+      <input matInput [(ngModel)]="hero.name" placeholder="name" />
+    </mat-form-field>
   </div>
-  <hr>
+
+  <h2>RATINGS:</h2>
+
   <div>
-    <label>Moonwalk Rating:
-      <input type="number" [(ngModel)]="ratings.moonwalk" placeholder="moonwalk" />
-    </label>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="ratings.moonwalk" placeholder="moonwalk rating" />
+    </mat-form-field>
   </div>
+
   <div>
-    <label>Sprinkler Rating:
-      <input type="number" [(ngModel)]="ratings.sprinkler" placeholder="sprinkler" />
-    </label>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="ratings.sprinkler" placeholder="sprinkler rating" />
+    </mat-form-field>
   </div>
+
   <div>
-    <label>Worm Rating:
-      <input type="number" [(ngModel)]="ratings.worm" placeholder="worm" />
-    </label>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="ratings.worm" placeholder="worm rating" />
+    </mat-form-field>
   </div>
+
   <div>
-    <label>Disco Rating:
-      <input type="number" [(ngModel)]="ratings.disco" placeholder="disco" />
-    </label>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="ratings.disco" placeholder="disco rating" />
+    </mat-form-field>
   </div>
+
+
   <button mat-raised-button (click)="goBack()">go back</button>
   <button mat-raised-button (click)="save()">save</button>
 </div>
