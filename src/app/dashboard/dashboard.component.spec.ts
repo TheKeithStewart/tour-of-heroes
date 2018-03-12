@@ -4,13 +4,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 
 import { DashboardComponent } from './dashboard.component';
-import * as fromHero from './../reducers';
+import * as fromDancer from './../reducers';
 
 @Component({
-  selector: 'app-hero-search',
+  selector: 'app-dancer-search',
   template: ''
 })
-class TestHeroSearchComponent { }
+class TestDancerSearchComponent { }
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -18,15 +18,15 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent, TestHeroSearchComponent ],
+      declarations: [DashboardComponent, TestDancerSearchComponent],
       imports: [
         RouterTestingModule,
         StoreModule.forRoot({
-          ...fromHero.reducers
+          ...fromDancer.reducers
         })
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

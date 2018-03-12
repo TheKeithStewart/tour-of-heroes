@@ -3,23 +3,23 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { Dancer } from './../models/dancer.model';
-import * as fromHero from './../reducers';
+import * as fromDancer from './../reducers';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.css' ]
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  heroes: Observable<Dancer[]>;
+  dancers: Observable<Dancer[]>;
 
-  constructor(private store: Store<fromHero.State>) { }
+  constructor(private store: Store<fromDancer.State>) { }
 
   ngOnInit() {
-    this.getHeroes();
+    this.getDancers();
   }
 
-  getHeroes(): void {
-    this.heroes = this.store.select(fromHero.getTopHeroes);
+  getDancers(): void {
+    this.dancers = this.store.select(fromDancer.getTopDancers);
   }
 }

@@ -1,4 +1,4 @@
-import { HeroActions, HeroActionTypes } from './../actions/hero.actions';
+import { DancerActions, DancerActionTypes } from './../actions/dancer.actions';
 
 export interface State {
   ids: number[];
@@ -14,9 +14,9 @@ export const initialState: State = {
   query: ''
 };
 
-export function reducer(state = initialState, action: HeroActions): State {
+export function reducer(state = initialState, action: DancerActions): State {
   switch (action.type) {
-    case HeroActionTypes.Search: {
+    case DancerActionTypes.Search: {
       const query = action.payload;
 
       if (query === '') {
@@ -36,16 +36,16 @@ export function reducer(state = initialState, action: HeroActions): State {
       };
     }
 
-    case HeroActionTypes.SearchSuccess: {
+    case DancerActionTypes.SearchSuccess: {
       return {
         ...state,
-        ids: action.payload.map(hero => hero.id),
+        ids: action.payload.map(dancer => dancer.id),
         loading: false,
         error: ''
       }
     }
 
-    case HeroActionTypes.SearchFail: {
+    case DancerActionTypes.SearchFail: {
       return {
         ...state,
         loading: false,

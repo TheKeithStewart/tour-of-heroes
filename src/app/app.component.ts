@@ -19,7 +19,7 @@ export class AppComponent {
     this.router.navigate(['/dashboard']);
   }
 
-  heroes() {
-    this.router.navigate(['/heroes']);
+  dancers() {
+    this.router.navigate(['/dancers']);
   }
 }

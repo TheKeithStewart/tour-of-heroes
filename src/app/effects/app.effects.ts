@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { 
+import {
   map,
   concatMap,
   catchError,
@@ -15,76 +15,76 @@ import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';
 
 import {
-  HeroActionTypes,
-  LoadHeroes,
-  LoadHeroesFail,
-  LoadHeroesSuccess,
+  DancerActionTypes,
+  LoadDancers,
+  LoadDancersFail,
+  LoadDancersSuccess,
   GetDancer,
-  GetHeroSuccess,
-  GetHeroFail,
-  UpsertHero,
-  UpdateHero,
-  UpdateHeroSuccess,
-  UpdateHeroFail,
+  GetDancerSuccess,
+  GetDancerFail,
+  UpsertDancer,
+  UpdateDancer,
+  UpdateDancerSuccess,
+  UpdateDancerFail,
   Search,
   SearchSuccess,
   SearchFail
-} from './../actions/hero.actions';
-import { HeroService } from './../hero.service';
+} from './../actions/dancer.actions';
+import { DancerService } from './../dancer.service';
 
 @Injectable()
 export class AppEffects {
   @Effect()
-  loadHeroes$: Observable<Action> = this.actions$.pipe(
-    ofType<LoadHeroes>(HeroActionTypes.LoadHeroes),
-    concatMap(() => this.heroService.getHeroes().pipe(
-      map(heroes => new LoadHeroesSuccess({ heroes: heroes })),
-      catchError(err => of(new LoadHeroesFail(err)))
+  loadDancers$: Observable<Action> = this.actions$.pipe(
+    ofType<LoadDancers>(DancerActionTypes.LoadDancers),
+    concatMap(() => this.dancerService.getDancers().pipe(
+      map(dancers => new LoadDancersSuccess({ dancers: dancers })),
+      catchError(err => of(new LoadDancersFail(err)))
     ))
   );
 
   @Effect()
-  getHero$: Observable<Action> = this.actions$.pipe(
-    ofType<GetDancer>(HeroActionTypes.GetHero),
+  getDancer$: Observable<Action> = this.actions$.pipe(
+    ofType<GetDancer>(DancerActionTypes.GetDancer),
     map(action => action.payload),
-    concatMap(id => this.heroService.getHero(id).pipe(
-      map(hero => new GetHeroSuccess({ id, changes: hero })),
-      catchError(err => of(new GetHeroFail(err)))
+    concatMap(id => this.dancerService.getDancer(id).pipe(
+      map(dancer => new GetDancerSuccess({ id, changes: dancer })),
+      catchError(err => of(new GetDancerFail(err)))
     ))
   );
 
   @Effect()
-  updateHero$: Observable<Action> = this.actions$.pipe(
-    ofType<UpdateHero>(HeroActionTypes.UpdateDancer),
-    concatMap(action => this.heroService.updateHero(action.payload).pipe(
+  updateDancer$: Observable<Action> = this.actions$.pipe(
+    ofType<UpdateDancer>(DancerActionTypes.UpdateDancer),
+    concatMap(action => this.dancerService.updateDancer(action.payload).pipe(
       map(() => {
-        const hero = action.payload;
-        return new UpdateHeroSuccess({ hero: { id: hero.id, changes: hero } })
+        const dancer = action.payload;
+        return new UpdateDancerSuccess({ dancer: { id: dancer.id, changes: dancer } })
       }),
       tap(() => this.location.back()),
-      catchError(err => of(new UpdateHeroFail(err)))
+      catchError(err => of(new UpdateDancerFail(err)))
     ))
   );
 
   @Effect()
   search$: Observable<Action> = this.actions$.pipe(
-    ofType<Search>(HeroActionTypes.Search),
+    ofType<Search>(DancerActionTypes.Search),
     debounceTime(300),
     distinctUntilChanged(),
-    concatMap((action: Search) => this.heroService.searchHeroes(action.payload).pipe(
-      map(heroes => new SearchSuccess(heroes)),
+    concatMap((action: Search) => this.dancerService.searchDancers(action.payload).pipe(
+      map(dancers => new SearchSuccess(dancers)),
       catchError(err => of(new SearchFail(err)))
     ))
   );
 
   // Should be your last effect
   @Effect() init$: Observable<Action> = defer(() => {
-    return of(new LoadHeroes())
+    return of(new LoadDancers())
   });
 
   constructor(
     private actions$: Actions,
-    private heroService: HeroService,
+    private dancerService: DancerService,
     private location: Location
-  ) {}
+  ) { }
 }

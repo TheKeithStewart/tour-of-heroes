@@ -2,26 +2,26 @@
 
 <div>
   <mat-form-field>
-    <input matInput placeholder="Dancer Name" #heroName />
+    <input matInput placeholder="Dancer Name" #dancerName />
   </mat-form-field>
 
   <!-- (click) passes input value to add() and then clears the input -->
-  <button mat-raised-button (click)="add(heroName.value); heroName.value=''">
+  <button mat-raised-button (click)="add(dancerName.value); dancerName.value=''">
     add
   </button>
 </div>
 
-<mat-card *ngFor="let hero of heroes$ | async">
+<mat-card *ngFor="let dancer of dancers$ | async">
   <mat-card-content>
     <mat-card-title>
-      {{hero.name}}
+      {{dancer.name}}
     </mat-card-title>
 
     <button mat-raised-button>
-      <a routerLink="/detail/{{hero.id}}">edit</a>
+      <a routerLink="/detail/{{dancer.id}}">edit</a>
     </button>
 
-    <button class="delete" (click)="delete(hero)">
+    <button class="delete" (click)="delete(dancer)">
       <i class="material-icons">delete_forever</i>
     </button>
   </mat-card-content>
