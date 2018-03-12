@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { Hero } from './../models/hero.model';
+import { Dancer } from './../models/dancer.model';
 import * as fromHero from './../reducers';
 
 @Component({
@@ -11,7 +11,7 @@ import * as fromHero from './../reducers';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  heroes: Observable<Hero[]>;
+  heroes: Observable<Dancer[]>;
 
   constructor(private store: Store<fromHero.State>) { }
 

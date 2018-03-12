@@ -1,86 +1,86 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Hero } from './../models/hero.model';
+import { Dancer } from './../models/dancer.model';
 
 export enum HeroActionTypes {
-  AddHero = '[Hero] Add Hero',
-  UpsertHero = '[Hero] Upsert Hero',
-  AddHeroes = '[Hero] Add Heroes',
-  UpsertHeroes = '[Hero] Upsert Heroes',
-  UpdateHero = '[Hero] Update Hero',
-  UpdateHeroSuccess = '[Hero] Update Hero Success',
-  UpdateHeroFail = '[Hero] Update Hero Fail',
-  UpdateHeroes = '[Hero] Update Heroes',
-  DeleteHero = '[Hero] Delete Hero',
-  DeleteHeroes = '[Hero] Delete Heroes',
-  ClearHeroes = '[Hero] Clear Heroes',
-  LoadHeroes = '[Hero] Load Heroes',
-  LoadHeroesSuccess = '[Hero] Load Heroes Success',
-  LoadHeroesFail = '[Hero] Load Heroes Fail',
-  GetHero = '[Hero] Get Hero',
-  GetHeroSuccess = '[Hero] Get Hero Success',
-  GetHeroFail = '[Hero] Get Hero Fail',
-  Search = '[Hero] Search',
-  SearchSuccess = '[Hero] Search Success',
-  SearchFail = '[Hero] Search Fail'
+  AddDancer = '[Dancer] Add Hero',
+  UpsertDancer = '[Dancer] Upsert Hero',
+  AddDancers = '[Dancer] Add Heroes',
+  UpsertDancers = '[Dancer] Upsert Heroes',
+  UpdateDancer = '[Dancer] Update Hero',
+  UpdateDancerSuccess = '[Dancer] Update Hero Success',
+  UpdateDancerFail = '[Dancer] Update Hero Fail',
+  UpdateDancers = '[Dancer] Update Heroes',
+  DeleteDancer = '[Dancer] Delete Hero',
+  DeleteDancers = '[Dancer] Delete Heroes',
+  ClearHeroes = '[Dancer] Clear Heroes',
+  LoadHeroes = '[Dancer] Load Heroes',
+  LoadHeroesSuccess = '[Dancer] Load Heroes Success',
+  LoadHeroesFail = '[Dancer] Load Heroes Fail',
+  GetHero = '[Dancer] Get Hero',
+  GetHeroSuccess = '[Dancer] Get Hero Success',
+  GetHeroFail = '[Dancer] Get Hero Fail',
+  Search = '[Dancer] Search',
+  SearchSuccess = '[Dancer] Search Success',
+  SearchFail = '[Dancer] Search Fail'
 }
 
 export class AddHero implements Action {
-  readonly type = HeroActionTypes.AddHero;
+  readonly type = HeroActionTypes.AddDancer;
 
-  constructor(public payload: { hero: Hero }) { }
+  constructor(public payload: { hero: Dancer }) { }
 }
 
 export class UpsertHero implements Action {
-  readonly type = HeroActionTypes.UpsertHero;
+  readonly type = HeroActionTypes.UpsertDancer;
 
-  constructor(public payload: { hero: Update<Hero> }) { }
+  constructor(public payload: { hero: Update<Dancer> }) { }
 }
 
 export class AddHeroes implements Action {
-  readonly type = HeroActionTypes.AddHeroes;
+  readonly type = HeroActionTypes.AddDancers;
 
-  constructor(public payload: { heroes: Hero[] }) { }
+  constructor(public payload: { heroes: Dancer[] }) { }
 }
 
 export class UpsertHeroes implements Action {
-  readonly type = HeroActionTypes.UpsertHeroes;
+  readonly type = HeroActionTypes.UpsertDancers;
 
-  constructor(public payload: { heroes: Update<Hero>[] }) { }
+  constructor(public payload: { heroes: Update<Dancer>[] }) { }
 }
 
 export class UpdateHero implements Action {
-  readonly type = HeroActionTypes.UpdateHero;
+  readonly type = HeroActionTypes.UpdateDancer;
 
-  constructor(public payload: Hero) { }
+  constructor(public payload: Dancer) { }
 }
 
 export class UpdateHeroSuccess implements Action {
-  readonly type = HeroActionTypes.UpdateHeroSuccess;
+  readonly type = HeroActionTypes.UpdateDancerSuccess;
 
-  constructor(public payload: { hero: Update<Hero> }) { }
+  constructor(public payload: { hero: Update<Dancer> }) { }
 }
 
 export class UpdateHeroFail implements Action {
-  readonly type = HeroActionTypes.UpdateHeroFail;
+  readonly type = HeroActionTypes.UpdateDancerFail;
 
   constructor(public payload: string) { }
 }
 
 export class UpdateHeroes implements Action {
-  readonly type = HeroActionTypes.UpdateHeroes;
+  readonly type = HeroActionTypes.UpdateDancers;
 
-  constructor(public payload: { heroes: Update<Hero>[] }) { }
+  constructor(public payload: { heroes: Update<Dancer>[] }) { }
 }
 
 export class DeleteHero implements Action {
-  readonly type = HeroActionTypes.DeleteHero;
+  readonly type = HeroActionTypes.DeleteDancer;
 
   constructor(public payload: { id: number }) { }
 }
 
 export class DeleteHeroes implements Action {
-  readonly type = HeroActionTypes.DeleteHeroes;
+  readonly type = HeroActionTypes.DeleteDancers;
 
   constructor(public payload: { ids: number[] }) { }
 }
@@ -96,7 +96,7 @@ export class LoadHeroes implements Action {
 export class LoadHeroesSuccess implements Action {
   readonly type = HeroActionTypes.LoadHeroesSuccess;
 
-  constructor(public payload: { heroes: Hero[] }) { }
+  constructor(public payload: { heroes: Dancer[] }) { }
 }
 
 export class LoadHeroesFail implements Action {
@@ -105,7 +105,7 @@ export class LoadHeroesFail implements Action {
   constructor(public payload: string) { }
 }
 
-export class GetHero implements Action {
+export class GetDancer implements Action {
   readonly type = HeroActionTypes.GetHero;
 
   constructor(public payload: number) { }
@@ -114,7 +114,7 @@ export class GetHero implements Action {
 export class GetHeroSuccess implements Action {
   readonly type = HeroActionTypes.GetHeroSuccess;
 
-  constructor(public payload: Update<Hero>) { }
+  constructor(public payload: Update<Dancer>) { }
 }
 
 export class GetHeroFail implements Action {
@@ -132,7 +132,7 @@ export class Search implements Action {
 export class SearchSuccess implements Action {
   readonly type = HeroActionTypes.SearchSuccess;
 
-  constructor(public payload: Hero[]) { }
+  constructor(public payload: Dancer[]) { }
 }
 
 export class SearchFail implements Action {
@@ -156,7 +156,7 @@ export type HeroActions =
   | ClearHeroes
   | LoadHeroes
   | LoadHeroesFail
-  | GetHero
+  | GetDancer
   | GetHeroSuccess
   | GetHeroFail
   | Search

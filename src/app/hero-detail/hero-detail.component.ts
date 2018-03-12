@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { tap, filter, take } from 'rxjs/operators';
 import { Location } from '@angular/common';
 
-import { Hero } from './../models/hero.model';
+import { Dancer } from './../models/dancer.model';
 import * as fromHero from './../reducers';
 import * as HeroActions from './../actions/hero.actions';
 import { MaterialModule } from '../material.module';
@@ -15,7 +15,7 @@ import { MaterialModule } from '../material.module';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
-  hero: Hero;
+  hero: Dancer;
   
   ratings: {
     moonwalk: number;
@@ -30,13 +30,13 @@ export class HeroDetailComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit(): void {
-    this.getHero();
+    this.getDancer();
   }
 
-  getHero(): void {
+  getDancer(): void {
     const id = +this.route.snapshot.paramMap.get('id');
 
-    this.store.dispatch(new HeroActions.GetHero(id));
+    this.store.dispatch(new HeroActions.GetDancer(id));
     this.store.select(fromHero.getSelectedHero).pipe(
       filter(hero => hero && hero.id === id),
       take(1),
@@ -52,7 +52,7 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    const hero: Hero = {
+    const hero: Dancer = {
       ...this.hero,
       ratings: {
         ...this.ratings

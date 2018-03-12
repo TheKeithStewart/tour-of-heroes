@@ -12,12 +12,12 @@ import { async } from 'rxjs/scheduler/async';
 
 import { AppEffects } from './app.effects';
 import { HeroService } from './../hero.service';
-import { Hero } from './../models/hero.model';
+import { Dancer } from './../models/dancer.model';
 import {
   LoadHeroes,
   LoadHeroesSuccess,
   LoadHeroesFail,
-  GetHero,
+  GetDancer,
   GetHeroSuccess,
   GetHeroFail,
   UpdateHero,
@@ -77,8 +77,8 @@ describe('AppService', () => {
 
   describe('loadHeroes$', () => {
     it('should return a LoadHeroesSuccess, with heroes, on success', () => {
-      const hero1 = { id: 1, name: 'test1' } as Hero;
-      const hero2 = { id: 2, name: 'test2' } as Hero;
+      const hero1 = { id: 1, name: 'test1' } as Dancer;
+      const hero2 = { id: 2, name: 'test2' } as Dancer;
       const heroes = [hero1, hero2];
       const action = new LoadHeroes();
       const completion = new LoadHeroesSuccess({ heroes: heroes });
@@ -106,10 +106,10 @@ describe('AppService', () => {
   });
 
   describe('getHero$', () => {
-    const hero = { id: 1, name: 'test1' } as Hero;
+    const hero = { id: 1, name: 'test1' } as Dancer;
 
     it('should return a GetHeroSuccess, with a hero, on success', () => {
-      const action = new GetHero(hero.id);
+      const action = new GetDancer(hero.id);
       const completion = new GetHeroSuccess({ id: hero.id, changes: hero });
 
       actions$.stream = hot('-a', { a: action });
@@ -121,7 +121,7 @@ describe('AppService', () => {
     });
 
     it('should return a GetHeroFail if there is a failure', () => {
-      const action = new GetHero(hero.id);
+      const action = new GetDancer(hero.id);
       const error = 'Oh noooooooo!!!';
       const completion = new GetHeroFail(error);
 
@@ -135,7 +135,7 @@ describe('AppService', () => {
   });
 
   describe('updateHero$', () => {
-    const hero = { id: 1, name: 'test1' } as Hero;
+    const hero = { id: 1, name: 'test1' } as Dancer;
 
     it('should return an UpdateHeroSuccess, with the hero changes, and navigate back on success', () => {
       location.back = jasmine.createSpy('back');
@@ -173,8 +173,8 @@ describe('AppService', () => {
     });
 
     it('should return a SearchSuccess, after a 300ms de-bounce, on success', () => {
-      const hero1 = { id: 1, name: 'test1' } as Hero;
-      const hero2 = { id: 2, name: 'test2' } as Hero;
+      const hero1 = { id: 1, name: 'test1' } as Dancer;
+      const hero2 = { id: 2, name: 'test2' } as Dancer;
       const heroes = [hero1, hero2];
       const action = new Search('query');
       const completion = new SearchSuccess(heroes);

@@ -1,4 +1,4 @@
-export interface Hero {
+export interface Dancer {
   id: number;
   name: string;
   ratings: {

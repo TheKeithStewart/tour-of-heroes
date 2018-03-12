@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import { Hero } from './../models/hero.model';
+import { Dancer } from './../models/dancer.model';
 import * as fromHero from './../reducers';
 import * as HeroActions from './../actions/hero.actions';
 
@@ -14,7 +14,7 @@ import { MaterialModule } from '../material.module';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes$: Observable<Hero[]>;
+  heroes$: Observable<Dancer[]>;
   heroIds: number[] = [];
 
   constructor(private store: Store<fromHero.State>) { }
@@ -48,7 +48,7 @@ export class HeroesComponent implements OnInit {
     } }));
   }
 
-  delete(hero: Hero): void {
+  delete(hero: Dancer): void {
     this.store.dispatch(new HeroActions.DeleteHero({ id: hero.id }))
   }
 

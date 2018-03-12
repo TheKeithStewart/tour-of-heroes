@@ -19,7 +19,7 @@ import {
   LoadHeroes,
   LoadHeroesFail,
   LoadHeroesSuccess,
-  GetHero,
+  GetDancer,
   GetHeroSuccess,
   GetHeroFail,
   UpsertHero,
@@ -45,7 +45,7 @@ export class AppEffects {
 
   @Effect()
   getHero$: Observable<Action> = this.actions$.pipe(
-    ofType<GetHero>(HeroActionTypes.GetHero),
+    ofType<GetDancer>(HeroActionTypes.GetHero),
     map(action => action.payload),
     concatMap(id => this.heroService.getHero(id).pipe(
       map(hero => new GetHeroSuccess({ id, changes: hero })),
@@ -55,7 +55,7 @@ export class AppEffects {
 
   @Effect()
   updateHero$: Observable<Action> = this.actions$.pipe(
-    ofType<UpdateHero>(HeroActionTypes.UpdateHero),
+    ofType<UpdateHero>(HeroActionTypes.UpdateDancer),
     concatMap(action => this.heroService.updateHero(action.payload).pipe(
       map(() => {
         const hero = action.payload;

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Hero } from './../models/hero.model';
+import { Dancer } from './../models/dancer.model';
 
 import * as fromHero from './../reducers';
 import * as HeroActions from './../actions/hero.actions';
@@ -16,7 +16,7 @@ import { MaterialModule } from '../material.module';
   styleUrls: ['./hero-search.component.css']
 })
 export class HeroSearchComponent implements OnInit {
-  heroes$: Observable<Hero[]>;
+  heroes$: Observable<Dancer[]>;
 
   constructor(private store: Store<fromHero.State>) {}
 

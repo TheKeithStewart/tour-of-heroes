@@ -1,6 +1,6 @@
-import { Hero } from './models/hero.model';
+import { Dancer } from './models/dancer.model';
 
-export const HEROES: Hero[] = [
+export const HEROES: Dancer[] = [
   { id: 1, name: 'Madonna', ratings: {
     moonwalk: 1,
     sprinkler: 2,
