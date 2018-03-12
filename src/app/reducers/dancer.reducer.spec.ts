@@ -1,6 +1,6 @@
-import { reducer, initialState } from './hero.reducer';
+import { reducer, initialState } from './dancer.reducer';
 
-describe('Hero Reducer', () => {
+describe('Dancer Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

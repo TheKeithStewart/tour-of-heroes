@@ -11,22 +11,22 @@ import { empty } from 'rxjs/observable/empty';
 import { async } from 'rxjs/scheduler/async';
 
 import { AppEffects } from './app.effects';
-import { HeroService } from './../hero.service';
+import { DancerService } from './../dancer.service';
 import { Dancer } from './../models/dancer.model';
 import {
-  LoadHeroes,
-  LoadHeroesSuccess,
-  LoadHeroesFail,
+  LoadDancers,
+  LoadDancersSuccess,
+  LoadDancersFail,
   GetDancer,
-  GetHeroSuccess,
-  GetHeroFail,
-  UpdateHero,
-  UpdateHeroSuccess,
-  UpdateHeroFail,
+  GetDancerSuccess,
+  GetDancerFail,
+  UpdateDancer,
+  UpdateDancerSuccess,
+  UpdateDancerFail,
   Search,
   SearchSuccess,
   SearchFail
-} from './../actions/hero.actions';
+} from './../actions/dancer.actions';
 
 export class TestActions extends Actions {
   constructor() {
@@ -42,17 +42,17 @@ export function getActions() {
   return new TestActions();
 }
 
-class MockHeroService {
-  getHeroes = jasmine.createSpy('getHeroes');
-  getHero = jasmine.createSpy('getHero');
-  updateHero = jasmine.createSpy('updateHero');
-  searchHeroes = jasmine.createSpy('searchHeroes');
+class MockDancerService {
+  getDancers = jasmine.createSpy('getDancers');
+  getDancer = jasmine.createSpy('getDancer');
+  updateDancer = jasmine.createSpy('updateDancer');
+  searchDancers = jasmine.createSpy('searchDancers');
 }
 
 describe('AppService', () => {
   let actions$: TestActions;
   let effects: AppEffects;
-  let heroService: any;
+  let dancerService: any;
   let location: SpyLocation;
 
   beforeEach(() => {
@@ -60,7 +60,7 @@ describe('AppService', () => {
       providers: [
         AppEffects,
         provideMockActions(() => actions$),
-        { provide: HeroService, useClass: MockHeroService },
+        { provide: DancerService, useClass: MockDancerService },
         { provide: Actions, useFactory: getActions },
 
       ],
@@ -70,119 +70,119 @@ describe('AppService', () => {
     });
 
     effects = TestBed.get(AppEffects);
-    heroService = TestBed.get(HeroService);
+    dancerService = TestBed.get(DancerService);
     actions$ = TestBed.get(Actions);
     location = TestBed.get(Location);
   });
 
-  describe('loadHeroes$', () => {
-    it('should return a LoadHeroesSuccess, with heroes, on success', () => {
-      const hero1 = { id: 1, name: 'test1' } as Dancer;
-      const hero2 = { id: 2, name: 'test2' } as Dancer;
-      const heroes = [hero1, hero2];
-      const action = new LoadHeroes();
-      const completion = new LoadHeroesSuccess({ heroes: heroes });
+  describe('loadDancers$', () => {
+    it('should return a LoadDancersSuccess, with dancers, on success', () => {
+      const dancer1 = { id: 1, name: 'test1' } as Dancer;
+      const dancer2 = { id: 2, name: 'test2' } as Dancer;
+      const dancers = [dancer1, dancer2];
+      const action = new LoadDancers();
+      const completion = new LoadDancersSuccess({ dancers: dancers });
 
       actions$.stream = hot('-a', { a: action });
-      const response = cold('-b|', { b: heroes });
+      const response = cold('-b|', { b: dancers });
       const expected = cold('--c', { c: completion });
-      heroService.getHeroes.and.returnValue(response);
+      dancerService.getDancers.and.returnValue(response);
 
-      expect(effects.loadHeroes$).toBeObservable(expected);
+      expect(effects.loadDancers$).toBeObservable(expected);
     });
 
-    it('should return a LoadHeroesFail if there is a failure', () => {
-      const action = new LoadHeroes();
+    it('should return a LoadDancersFail if there is a failure', () => {
+      const action = new LoadDancers();
       const error = 'Epic fail!!!';
-      const completion = new LoadHeroesFail(error);
+      const completion = new LoadDancersFail(error);
 
       actions$.stream = hot('-a', { a: action });
       const response = cold('-#|', {}, error);
       const expected = cold('--b', { b: completion });
-      heroService.getHeroes.and.returnValue(response);
+      dancerService.getDancers.and.returnValue(response);
 
-      expect(effects.loadHeroes$).toBeObservable(expected);
+      expect(effects.loadDancers$).toBeObservable(expected);
     });
   });
 
-  describe('getHero$', () => {
-    const hero = { id: 1, name: 'test1' } as Dancer;
+  describe('getDancer$', () => {
+    const dancer = { id: 1, name: 'test1' } as Dancer;
 
-    it('should return a GetHeroSuccess, with a hero, on success', () => {
-      const action = new GetDancer(hero.id);
-      const completion = new GetHeroSuccess({ id: hero.id, changes: hero });
+    it('should return a GetDancerSuccess, with a dancer, on success', () => {
+      const action = new GetDancer(dancer.id);
+      const completion = new GetDancerSuccess({ id: dancer.id, changes: dancer });
 
       actions$.stream = hot('-a', { a: action });
-      const response = cold('-b|', { b: hero });
+      const response = cold('-b|', { b: dancer });
       const expected = cold('--c', { c: completion });
-      heroService.getHero.and.returnValue(response);
+      dancerService.getDancer.and.returnValue(response);
 
-      expect(effects.getHero$).toBeObservable(expected);
+      expect(effects.getDancer$).toBeObservable(expected);
     });
 
-    it('should return a GetHeroFail if there is a failure', () => {
-      const action = new GetDancer(hero.id);
+    it('should return a GetDancerFail if there is a failure', () => {
+      const action = new GetDancer(dancer.id);
       const error = 'Oh noooooooo!!!';
-      const completion = new GetHeroFail(error);
+      const completion = new GetDancerFail(error);
 
       actions$.stream = hot('-a', { a: action });
       const response = cold('-#|', {}, error);
       const expected = cold('--b', { b: completion });
-      heroService.getHero.and.returnValue(response);
+      dancerService.getDancer.and.returnValue(response);
 
-      expect(effects.getHero$).toBeObservable(expected);
+      expect(effects.getDancer$).toBeObservable(expected);
     });
   });
 
-  describe('updateHero$', () => {
-    const hero = { id: 1, name: 'test1' } as Dancer;
+  describe('updateDancer$', () => {
+    const dancer = { id: 1, name: 'test1' } as Dancer;
 
-    it('should return an UpdateHeroSuccess, with the hero changes, and navigate back on success', () => {
+    it('should return an UpdateDancerSuccess, with the dancer changes, and navigate back on success', () => {
       location.back = jasmine.createSpy('back');
-      const action = new UpdateHero(hero);
-      const completion = new UpdateHeroSuccess({ hero: { id: hero.id, changes: hero } });
+      const action = new UpdateDancer(dancer);
+      const completion = new UpdateDancerSuccess({ dancer: { id: dancer.id, changes: dancer } });
 
       actions$.stream = hot('-a', { a: action });
-      const response = cold('-b|', { b: hero });
+      const response = cold('-b|', { b: dancer });
       const expected = cold('--c', { c: completion });
-      heroService.updateHero.and.returnValue(response);
+      dancerService.updateDancer.and.returnValue(response);
 
-      expect(effects.updateHero$).toBeObservable(expected);
+      expect(effects.updateDancer$).toBeObservable(expected);
       expect(location.back).toHaveBeenCalled();
     });
 
-    it('should return an UpdateHeroFail if there is a failure', () => {
-      const action = new UpdateHero(hero);
+    it('should return an UpdateDancerFail if there is a failure', () => {
+      const action = new UpdateDancer(dancer);
       const error = 'This is very, very bad';
-      const completion = new UpdateHeroFail(error);
+      const completion = new UpdateDancerFail(error);
 
       actions$.stream = hot('-a', { a: action });
       const response = cold('-#|', {}, error);
       const expected = cold('--b', { b: completion });
-      heroService.updateHero.and.returnValue(response);
+      dancerService.updateDancer.and.returnValue(response);
 
-      expect(effects.updateHero$).toBeObservable(expected);
+      expect(effects.updateDancer$).toBeObservable(expected);
     });
   });
 
   describe('search$', () => {
     beforeEach(() => {
       const testScheduler = getTestScheduler();
-      async.schedule = (work, delay, state) =>     
-          testScheduler.schedule(work, delay, state);
+      async.schedule = (work, delay, state) =>
+        testScheduler.schedule(work, delay, state);
     });
 
     it('should return a SearchSuccess, after a 300ms de-bounce, on success', () => {
-      const hero1 = { id: 1, name: 'test1' } as Dancer;
-      const hero2 = { id: 2, name: 'test2' } as Dancer;
-      const heroes = [hero1, hero2];
+      const dancer1 = { id: 1, name: 'test1' } as Dancer;
+      const dancer2 = { id: 2, name: 'test2' } as Dancer;
+      const dancers = [dancer1, dancer2];
       const action = new Search('query');
-      const completion = new SearchSuccess(heroes);
+      const completion = new SearchSuccess(dancers);
 
       actions$.stream = hot('-a', { a: action });
-      const response = cold('-b|', { b: heroes });
+      const response = cold('-b|', { b: dancers });
       const expected = cold('--------------------------------c', { c: completion });
-      heroService.searchHeroes.and.returnValue(response);
+      dancerService.searchDancers.and.returnValue(response);
 
       expect(effects.search$).toBeObservable(expected);
     });
@@ -195,7 +195,7 @@ describe('AppService', () => {
       actions$.stream = hot('-a', { a: action });
       const response = cold('-#', {}, error);
       const expected = cold('--------------------------------b', { b: completion });
-      heroService.searchHeroes.and.returnValue(response);
+      dancerService.searchDancers.and.returnValue(response);
 
       expect(effects.search$).toBeObservable(expected);
     });

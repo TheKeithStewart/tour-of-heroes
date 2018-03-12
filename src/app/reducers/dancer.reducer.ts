@@ -1,12 +1,12 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Dancer } from './../models/dancer.model';
-import { HeroActions, HeroActionTypes } from './../actions/hero.actions';
+import { DancerActions, DancerActionTypes } from './../actions/dancer.actions';
 
 export interface State extends EntityState<Dancer> {
   loading: boolean,
   error: string,
-  selectedHeroId: number | null
+  selectedDancerId: number | null
 }
 
 export const adapter: EntityAdapter<Dancer> = createEntityAdapter<Dancer>();
@@ -14,31 +14,31 @@ export const adapter: EntityAdapter<Dancer> = createEntityAdapter<Dancer>();
 export const initialState: State = adapter.getInitialState({
   loading: false,
   error: '',
-  selectedHeroId: null
+  selectedDancerId: null
 });
 
 export function reducer(
   state = initialState,
-  action: HeroActions
+  action: DancerActions
 ): State {
   switch (action.type) {
-    case HeroActionTypes.AddDancer: {
-      return adapter.addOne(action.payload.hero, state);
+    case DancerActionTypes.AddDancer: {
+      return adapter.addOne(action.payload.dancer, state);
     }
 
-    case HeroActionTypes.UpsertDancer: {
-      return adapter.upsertOne(action.payload.hero, state);
+    case DancerActionTypes.UpsertDancer: {
+      return adapter.upsertOne(action.payload.dancer, state);
     }
 
-    case HeroActionTypes.AddDancers: {
-      return adapter.addMany(action.payload.heroes, state);
+    case DancerActionTypes.AddDancers: {
+      return adapter.addMany(action.payload.dancers, state);
     }
 
-    case HeroActionTypes.UpsertDancers: {
-      return adapter.upsertMany(action.payload.heroes, state);
+    case DancerActionTypes.UpsertDancers: {
+      return adapter.upsertMany(action.payload.dancers, state);
     }
 
-    case HeroActionTypes.UpdateDancer: {
+    case DancerActionTypes.UpdateDancer: {
       return {
         ...state,
         loading: true,
@@ -46,14 +46,14 @@ export function reducer(
       };
     }
 
-    case HeroActionTypes.UpdateDancerSuccess: {
+    case DancerActionTypes.UpdateDancerSuccess: {
       return {
-        ...adapter.updateOne(action.payload.hero, state),
+        ...adapter.updateOne(action.payload.dancer, state),
         loading: false
       };
     }
 
-    case HeroActionTypes.UpdateDancerFail: {
+    case DancerActionTypes.UpdateDancerFail: {
       return {
         ...state,
         loading: false,
@@ -61,27 +61,27 @@ export function reducer(
       }
     }
 
-    case HeroActionTypes.UpdateDancers: {
-      return adapter.updateMany(action.payload.heroes, state);
+    case DancerActionTypes.UpdateDancers: {
+      return adapter.updateMany(action.payload.dancers, state);
     }
 
-    case HeroActionTypes.DeleteDancer: {
+    case DancerActionTypes.DeleteDancer: {
       return adapter.removeOne(action.payload.id, state);
     }
 
-    case HeroActionTypes.DeleteDancers: {
+    case DancerActionTypes.DeleteDancers: {
       return adapter.removeMany(action.payload.ids, state);
     }
 
-    case HeroActionTypes.LoadHeroesSuccess: {
-      return adapter.addAll(action.payload.heroes, state);
+    case DancerActionTypes.LoadDancersSuccess: {
+      return adapter.addAll(action.payload.dancers, state);
     }
 
-    case HeroActionTypes.ClearHeroes: {
+    case DancerActionTypes.ClearDancers: {
       return adapter.removeAll(state);
     }
 
-    case HeroActionTypes.LoadHeroes: {
+    case DancerActionTypes.LoadDancers: {
       return {
         ...state,
         loading: true,
@@ -89,7 +89,7 @@ export function reducer(
       }
     }
 
-    case HeroActionTypes.LoadHeroesFail: {
+    case DancerActionTypes.LoadDancersFail: {
       return {
         ...state,
         loading: false,
@@ -97,7 +97,7 @@ export function reducer(
       }
     }
 
-    case HeroActionTypes.GetHero: {
+    case DancerActionTypes.GetDancer: {
       return {
         ...state,
         loading: true,
@@ -105,13 +105,13 @@ export function reducer(
       }
     }
 
-    case HeroActionTypes.GetHeroSuccess: {
+    case DancerActionTypes.GetDancerSuccess: {
       const id = <number>action.payload.id;
 
       return {
         ...adapter.upsertOne(action.payload, state),
         loading: false,
-        selectedHeroId: id
+        selectedDancerId: id
       }
     }
 
@@ -121,4 +121,4 @@ export function reducer(
   }
 }
 
-export const getSelectedHeroId = (state: State) => state.selectedHeroId;
+export const getSelectedDancerId = (state: State) => state.selectedDancerId;

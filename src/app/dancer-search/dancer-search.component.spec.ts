@@ -4,20 +4,20 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatCardModule, MatInputModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 
-import { HeroSearchComponent } from './hero-search.component';
-import * as fromHero from './../reducers';
+import { DancerSearchComponent } from './dancer-search.component';
+import * as fromDancer from './../reducers';
 
-describe('HeroSearchComponent', () => {
-  let component: HeroSearchComponent;
-  let fixture: ComponentFixture<HeroSearchComponent>;
+describe('DancerSearchComponent', () => {
+  let component: DancerSearchComponent;
+  let fixture: ComponentFixture<DancerSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeroSearchComponent ],
+      declarations: [DancerSearchComponent],
       imports: [
         RouterTestingModule,
         StoreModule.forRoot({
-          ...fromHero.reducers
+          ...fromDancer.reducers
         }),
         MatFormFieldModule,
         MatCardModule,
@@ -25,11 +25,11 @@ describe('HeroSearchComponent', () => {
         NoopAnimationsModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeroSearchComponent);
+    fixture = TestBed.createComponent(DancerSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

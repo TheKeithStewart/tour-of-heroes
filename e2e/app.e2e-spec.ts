@@ -3,37 +3,37 @@
 import { browser, element, by, ElementFinder, ElementArrayFinder } from 'protractor';
 import { promise } from 'selenium-webdriver';
 
-const expectedH1 = 'Tour of Heroes';
+const expectedH1 = 'Tour of Dancers';
 const expectedTitle = `${expectedH1}`;
-const targetHero = { id: 15, name: 'Magneta' };
-const targetHeroDashboardIndex = 3;
+const targetDancer = { id: 15, name: 'Magneta' };
+const targetDancerDashboardIndex = 3;
 const nameSuffix = 'X';
-const newHeroName = targetHero.name + nameSuffix;
+const newDancerName = targetDancer.name + nameSuffix;
 
-class Hero {
+class Dancer {
   id: number;
   name: string;
 
   // Factory methods
 
-  // Hero from string formatted as '<id> <name>'.
-  static fromString(s: string): Hero {
+  // Dancer from string formatted as '<id> <name>'.
+  static fromString(s: string): Dancer {
     return {
       id: +s.substr(0, s.indexOf(' ')),
       name: s.substr(s.indexOf(' ') + 1),
     };
   }
 
-  // Hero from hero list <li> element.
-  static async fromLi(li: ElementFinder): Promise<Hero> {
+  // Dancer from dancer list <li> element.
+  static async fromLi(li: ElementFinder): Promise<Dancer> {
     let stringsFromA = await li.all(by.css('a')).getText();
     let strings = stringsFromA[0].split(' ');
     return { id: +strings[0], name: strings[1] };
   }
 
-  // Hero id and name from the given detail element.
-  static async fromDetail(detail: ElementFinder): Promise<Hero> {
-    // Get hero id from the first <div>
+  // Dancer id and name from the given detail element.
+  static async fromDetail(detail: ElementFinder): Promise<Dancer> {
+    // Get dancer id from the first <div>
     let _id = await detail.all(by.css('div')).first().getText();
     // Get name from the h2
     let _name = await detail.element(by.css('h2')).getText();
@@ -56,14 +56,14 @@ describe('Tutorial part 6', () => {
 
       appDashboardHref: navElts.get(0),
       appDashboard: element(by.css('app-root app-dashboard')),
-      topHeroes: element.all(by.css('app-root app-dashboard > div h4')),
+      topDancers: element.all(by.css('app-root app-dashboard > div h4')),
 
-      appHeroesHref: navElts.get(1),
-      appHeroes: element(by.css('app-root app-heroes')),
-      allHeroes: element.all(by.css('app-root app-heroes li')),
-      selectedHeroSubview: element(by.css('app-root app-heroes > div:last-child')),
+      appDancersHref: navElts.get(1),
+      appDancers: element(by.css('app-root app-dancers')),
+      allDancers: element.all(by.css('app-root app-dancers li')),
+      selectedDancerSubview: element(by.css('app-root app-dancers > div:last-child')),
 
-      heroDetail: element(by.css('app-root app-hero-detail > div')),
+      dancerDetail: element(by.css('app-root app-dancer-detail > div')),
 
       searchBox: element(by.css('#search-box')),
       searchResults: element.all(by.css('.search-result li'))
@@ -80,7 +80,7 @@ describe('Tutorial part 6', () => {
       expectHeading(1, expectedH1);
     });
 
-    const expectedViewNames = ['Dashboard', 'Heroes'];
+    const expectedViewNames = ['Dashboard', 'Dancers'];
     it(`has views ${expectedViewNames}`, () => {
       let viewNames = getPageElts().navElts.map((el: ElementFinder) => el.getText());
       expect(viewNames).toEqual(expectedViewNames);
@@ -97,97 +97,97 @@ describe('Tutorial part 6', () => {
 
     beforeAll(() => browser.get(''));
 
-    it('has top heroes', () => {
+    it('has top dancers', () => {
       let page = getPageElts();
-      expect(page.topHeroes.count()).toEqual(4);
+      expect(page.topDancers.count()).toEqual(4);
     });
 
-    it(`selects and routes to ${targetHero.name} details`, dashboardSelectTargetHero);
+    it(`selects and routes to ${targetDancer.name} details`, dashboardSelectTargetDancer);
 
-    it(`updates hero name (${newHeroName}) in details view`, updateHeroNameInDetailView);
+    it(`updates dancer name (${newDancerName}) in details view`, updateDancerNameInDetailView);
 
-    it(`cancels and shows ${targetHero.name} in Dashboard`, () => {
+    it(`cancels and shows ${targetDancer.name} in Dashboard`, () => {
       element(by.buttonText('go back')).click();
       browser.waitForAngular(); // seems necessary to gets tests to pass for toh-pt6
 
-      let targetHeroElt = getPageElts().topHeroes.get(targetHeroDashboardIndex);
-      expect(targetHeroElt.getText()).toEqual(targetHero.name);
+      let targetDancerElt = getPageElts().topDancers.get(targetDancerDashboardIndex);
+      expect(targetDancerElt.getText()).toEqual(targetDancer.name);
     });
 
-    it(`selects and routes to ${targetHero.name} details`, dashboardSelectTargetHero);
+    it(`selects and routes to ${targetDancer.name} details`, dashboardSelectTargetDancer);
 
-    it(`updates hero name (${newHeroName}) in details view`, updateHeroNameInDetailView);
+    it(`updates dancer name (${newDancerName}) in details view`, updateDancerNameInDetailView);
 
-    it(`saves and shows ${newHeroName} in Dashboard`, () => {
+    it(`saves and shows ${newDancerName} in Dashboard`, () => {
       element(by.buttonText('save')).click();
       browser.waitForAngular(); // seems necessary to gets tests to pass for toh-pt6
 
-      let targetHeroElt = getPageElts().topHeroes.get(targetHeroDashboardIndex);
-      expect(targetHeroElt.getText()).toEqual(newHeroName);
+      let targetDancerElt = getPageElts().topDancers.get(targetDancerDashboardIndex);
+      expect(targetDancerElt.getText()).toEqual(newDancerName);
     });
 
   });
 
-  describe('Heroes tests', () => {
+  describe('Dancers tests', () => {
 
     beforeAll(() => browser.get(''));
 
-    it('can switch to Heroes view', () => {
-      getPageElts().appHeroesHref.click();
+    it('can switch to Dancers view', () => {
+      getPageElts().appDancersHref.click();
       let page = getPageElts();
-      expect(page.appHeroes.isPresent()).toBeTruthy();
-      expect(page.allHeroes.count()).toEqual(10, 'number of heroes');
+      expect(page.appDancers.isPresent()).toBeTruthy();
+      expect(page.allDancers.count()).toEqual(10, 'number of dancers');
     });
 
-    it('can route to hero details', async () => {
-      getHeroLiEltById(targetHero.id).click();
+    it('can route to dancer details', async () => {
+      getDancerLiEltById(targetDancer.id).click();
 
       let page = getPageElts();
-      expect(page.heroDetail.isPresent()).toBeTruthy('shows hero detail');
-      let hero = await Hero.fromDetail(page.heroDetail);
-      expect(hero.id).toEqual(targetHero.id);
-      expect(hero.name).toEqual(targetHero.name.toUpperCase());
+      expect(page.dancerDetail.isPresent()).toBeTruthy('shows dancer detail');
+      let dancer = await Dancer.fromDetail(page.dancerDetail);
+      expect(dancer.id).toEqual(targetDancer.id);
+      expect(dancer.name).toEqual(targetDancer.name.toUpperCase());
     });
 
-    it(`updates hero name (${newHeroName}) in details view`, updateHeroNameInDetailView);
+    it(`updates dancer name (${newDancerName}) in details view`, updateDancerNameInDetailView);
 
-    it(`shows ${newHeroName} in Heroes list`, () => {
+    it(`shows ${newDancerName} in Dancers list`, () => {
       element(by.buttonText('save')).click();
       browser.waitForAngular();
-      let expectedText = `${targetHero.id} ${newHeroName}`;
-      expect(getHeroAEltById(targetHero.id).getText()).toEqual(expectedText);
+      let expectedText = `${targetDancer.id} ${newDancerName}`;
+      expect(getDancerAEltById(targetDancer.id).getText()).toEqual(expectedText);
     });
 
-    it(`deletes ${newHeroName} from Heroes list`, async () => {
-      const heroesBefore = await toHeroArray(getPageElts().allHeroes);
-      const li = getHeroLiEltById(targetHero.id);
+    it(`deletes ${newDancerName} from Dancers list`, async () => {
+      const dancersBefore = await toDancerArray(getPageElts().allDancers);
+      const li = getDancerLiEltById(targetDancer.id);
 
       const page = getPageElts();
-      expect(page.appHeroes.isPresent()).toBeTruthy();
-      expect(page.allHeroes.count()).toEqual(9, 'number of heroes');
-      const heroesAfter = await toHeroArray(page.allHeroes);
-      // console.log(await Hero.fromLi(page.allHeroes[0]));
-      const expectedHeroes = heroesBefore.filter(h => h.name !== newHeroName);
-      expect(heroesAfter).toEqual(expectedHeroes);
-      // expect(page.selectedHeroSubview.isPresent()).toBeFalsy();
+      expect(page.appDancers.isPresent()).toBeTruthy();
+      expect(page.allDancers.count()).toEqual(9, 'number of dancers');
+      const dancersAfter = await toDancerArray(page.allDancers);
+      // console.log(await Dancer.fromLi(page.allDancers[0]));
+      const expectedDancers = dancersBefore.filter(h => h.name !== newDancerName);
+      expect(dancersAfter).toEqual(expectedDancers);
+      // expect(page.selectedDancerSubview.isPresent()).toBeFalsy();
     });
 
-    it(`adds back ${targetHero.name}`, async () => {
-      const newHeroName = 'Alice';
-      const heroesBefore = await toHeroArray(getPageElts().allHeroes);
-      const numHeroes = heroesBefore.length;
+    it(`adds back ${targetDancer.name}`, async () => {
+      const newDancerName = 'Alice';
+      const dancersBefore = await toDancerArray(getPageElts().allDancers);
+      const numDancers = dancersBefore.length;
 
-      element(by.css('input')).sendKeys(newHeroName);
+      element(by.css('input')).sendKeys(newDancerName);
       element(by.buttonText('add')).click();
 
       let page = getPageElts();
-      let heroesAfter = await toHeroArray(page.allHeroes);
-      expect(heroesAfter.length).toEqual(numHeroes + 1, 'number of heroes');
+      let dancersAfter = await toDancerArray(page.allDancers);
+      expect(dancersAfter.length).toEqual(numDancers + 1, 'number of dancers');
 
-      expect(heroesAfter.slice(0, numHeroes)).toEqual(heroesBefore, 'Old heroes are still there');
+      expect(dancersAfter.slice(0, numDancers)).toEqual(dancersBefore, 'Old dancers are still there');
 
-      const maxId = heroesBefore[heroesBefore.length - 1].id;
-      expect(heroesAfter[numHeroes]).toEqual({ id: maxId + 1, name: newHeroName });
+      const maxId = dancersBefore[dancersBefore.length - 1].id;
+      expect(dancersAfter[numDancers]).toEqual({ id: maxId + 1, name: newDancerName });
     });
 
     it('displays correctly styled buttons', async () => {
@@ -198,7 +198,7 @@ describe('Tutorial part 6', () => {
           expect(button.getCssValue('border')).toContain('none');
           expect(button.getCssValue('padding')).toBe('5px 10px');
           expect(button.getCssValue('border-radius')).toBe('4px');
-          // Styles defined in heroes.component.css
+          // Styles defined in dancers.component.css
           expect(button.getCssValue('left')).toBe('194px');
           expect(button.getCssValue('top')).toBe('-32px');
         }
@@ -214,7 +214,7 @@ describe('Tutorial part 6', () => {
 
   });
 
-  describe('Progressive hero search', () => {
+  describe('Progressive dancer search', () => {
 
     beforeAll(() => browser.get(''));
 
@@ -231,54 +231,54 @@ describe('Tutorial part 6', () => {
       expect(getPageElts().searchResults.count()).toBe(2);
     });
 
-    it(`continues search with 'e' and gets ${targetHero.name}`, async () => {
+    it(`continues search with 'e' and gets ${targetDancer.name}`, async () => {
       getPageElts().searchBox.sendKeys('n');
       browser.sleep(1000);
       let page = getPageElts();
       expect(page.searchResults.count()).toBe(1);
-      let hero = page.searchResults.get(0);
-      expect(hero.getText()).toEqual(targetHero.name);
+      let dancer = page.searchResults.get(0);
+      expect(dancer.getText()).toEqual(targetDancer.name);
     });
 
-    it(`navigates to ${targetHero.name} details view`, async () => {
-      let hero = getPageElts().searchResults.get(0);
-      expect(hero.getText()).toEqual(targetHero.name);
-      hero.click();
+    it(`navigates to ${targetDancer.name} details view`, async () => {
+      let dancer = getPageElts().searchResults.get(0);
+      expect(dancer.getText()).toEqual(targetDancer.name);
+      dancer.click();
 
       let page = getPageElts();
-      expect(page.heroDetail.isPresent()).toBeTruthy('shows hero detail');
-      let hero2 = await Hero.fromDetail(page.heroDetail);
-      expect(hero2.id).toEqual(targetHero.id);
-      expect(hero2.name).toEqual(targetHero.name.toUpperCase());
+      expect(page.dancerDetail.isPresent()).toBeTruthy('shows dancer detail');
+      let dancer2 = await Dancer.fromDetail(page.dancerDetail);
+      expect(dancer2.id).toEqual(targetDancer.id);
+      expect(dancer2.name).toEqual(targetDancer.name.toUpperCase());
     });
   });
 
-  async function dashboardSelectTargetHero() {
-    let targetHeroElt = getPageElts().topHeroes.get(targetHeroDashboardIndex);
-    expect(targetHeroElt.getText()).toEqual(targetHero.name);
-    targetHeroElt.click();
+  async function dashboardSelectTargetDancer() {
+    let targetDancerElt = getPageElts().topDancers.get(targetDancerDashboardIndex);
+    expect(targetDancerElt.getText()).toEqual(targetDancer.name);
+    targetDancerElt.click();
     browser.waitForAngular(); // seems necessary to gets tests to pass for toh-pt6
 
     let page = getPageElts();
-    expect(page.heroDetail.isPresent()).toBeTruthy('shows hero detail');
-    let hero = await Hero.fromDetail(page.heroDetail);
-    expect(hero.id).toEqual(targetHero.id);
-    expect(hero.name).toEqual(targetHero.name.toUpperCase());
+    expect(page.dancerDetail.isPresent()).toBeTruthy('shows dancer detail');
+    let dancer = await Dancer.fromDetail(page.dancerDetail);
+    expect(dancer.id).toEqual(targetDancer.id);
+    expect(dancer.name).toEqual(targetDancer.name.toUpperCase());
   }
 
-  async function updateHeroNameInDetailView() {
-    // Assumes that the current view is the hero details view.
-    addToHeroName(nameSuffix);
+  async function updateDancerNameInDetailView() {
+    // Assumes that the current view is the dancer details view.
+    addToDancerName(nameSuffix);
 
     let page = getPageElts();
-    let hero = await Hero.fromDetail(page.heroDetail);
-    expect(hero.id).toEqual(targetHero.id);
-    expect(hero.name).toEqual(newHeroName.toUpperCase());
+    let dancer = await Dancer.fromDetail(page.dancerDetail);
+    expect(dancer.id).toEqual(targetDancer.id);
+    expect(dancer.name).toEqual(newDancerName.toUpperCase());
   }
 
 });
 
-function addToHeroName(text: string): promise.Promise<void> {
+function addToDancerName(text: string): promise.Promise<void> {
   let input = element(by.css('input'));
   return input.sendKeys(text);
 }
@@ -289,18 +289,18 @@ function expectHeading(hLevel: number, expectedText: string): void {
   expect(hText).toEqual(expectedText, hTag);
 };
 
-function getHeroAEltById(id: number): ElementFinder {
+function getDancerAEltById(id: number): ElementFinder {
   let spanForId = element(by.cssContainingText('li span.badge', id.toString()));
   return spanForId.element(by.xpath('..'));
 }
 
-function getHeroLiEltById(id: number): ElementFinder {
+function getDancerLiEltById(id: number): ElementFinder {
   let spanForId = element(by.cssContainingText('li span.badge', id.toString()));
   return spanForId.element(by.xpath('../..'));
 }
 
-async function toHeroArray(allHeroes: ElementArrayFinder): Promise<Hero[]> {
-  let promisedHeroes = await allHeroes.map(Hero.fromLi);
+async function toDancerArray(allDancers: ElementArrayFinder): Promise<Dancer[]> {
+  let promisedDancers = await allDancers.map(Dancer.fromLi);
   // The cast is necessary to get around issuing with the signature of Promise.all()
-  return <Promise<any>>Promise.all(promisedHeroes);
+  return <Promise<any>>Promise.all(promisedDancers);
 }

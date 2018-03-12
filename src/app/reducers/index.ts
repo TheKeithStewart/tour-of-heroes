@@ -8,16 +8,16 @@ import {
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from '../../environments/environment';
-import * as fromHero from './hero.reducer';
+import * as fromDancer from './dancer.reducer';
 import * as fromSearch from './search.reducer';
 
 export interface State {
-  heroes: fromHero.State;
+  dancers: fromDancer.State;
   search: fromSearch.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  heroes: fromHero.reducer,
+  dancers: fromDancer.reducer,
   search: fromSearch.reducer,
 };
 
@@ -25,41 +25,41 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
   ? [storeFreeze]
   : [];
 
-export const getHeroState = createFeatureSelector<fromHero.State>('heroes');
+export const getDancerState = createFeatureSelector<fromDancer.State>('dancers');
 export const getSearchState = createFeatureSelector<fromSearch.State>('search');
 
 export const {
-  selectIds: getHeroIdState,
-  selectEntities: getHeroEntityState,
-  selectAll: getAllHeroes,
+  selectIds: getDancerIdState,
+  selectEntities: getDancerEntityState,
+  selectAll: getAllDancers,
   selectTotal,
-} = fromHero.adapter.getSelectors(getHeroState);
+} = fromDancer.adapter.getSelectors(getDancerState);
 
-export const getTopHeroes = createSelector(
-  getAllHeroes,
+export const getTopDancers = createSelector(
+  getAllDancers,
   (entities) => entities.slice(1, 5)
 );
 
-export const getSelectedHeroId = createSelector(
-  getHeroState,
-  fromHero.getSelectedHeroId
+export const getSelectedDancerId = createSelector(
+  getDancerState,
+  fromDancer.getSelectedDancerId
 );
-export const getSelectedHero = createSelector(
-  getHeroEntityState,
-  getSelectedHeroId,
+export const getSelectedDancer = createSelector(
+  getDancerEntityState,
+  getSelectedDancerId,
   (entities, selectedId) => {
     return selectedId && entities[selectedId]
   }
 );
 
-export const getSearchHeroIds = createSelector(
+export const getSearchDancerIds = createSelector(
   getSearchState,
   fromSearch.getIds
 );
 export const getSearchResult = createSelector(
-  getHeroEntityState,
-  getSearchHeroIds,
-  (heroes, searchIds) => {
-    return searchIds.map(id => heroes[id]);
+  getDancerEntityState,
+  getSearchDancerIds,
+  (dancers, searchIds) => {
+    return searchIds.map(id => dancers[id]);
   }
 );

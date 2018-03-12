@@ -5,18 +5,18 @@ import { tap, filter, take } from 'rxjs/operators';
 import { Location } from '@angular/common';
 
 import { Dancer } from './../models/dancer.model';
-import * as fromHero from './../reducers';
-import * as HeroActions from './../actions/hero.actions';
+import * as fromDancer from './../reducers';
+import * as DancerActions from './../actions/dancer.actions';
 import { MaterialModule } from '../material.module';
 
 @Component({
-  selector: 'app-hero-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.css']
+  selector: 'app-dancer-detail',
+  templateUrl: './dancer-detail.component.html',
+  styleUrls: ['./dancer-detail.component.css']
 })
-export class HeroDetailComponent implements OnInit {
-  hero: Dancer;
-  
+export class DancerDetailComponent implements OnInit {
+  dancer: Dancer;
+
   ratings: {
     moonwalk: number;
     sprinkler: number;
@@ -26,7 +26,7 @@ export class HeroDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<fromHero.State>,
+    private store: Store<fromDancer.State>,
     private location: Location) { }
 
   ngOnInit(): void {
@@ -36,13 +36,13 @@ export class HeroDetailComponent implements OnInit {
   getDancer(): void {
     const id = +this.route.snapshot.paramMap.get('id');
 
-    this.store.dispatch(new HeroActions.GetDancer(id));
-    this.store.select(fromHero.getSelectedHero).pipe(
-      filter(hero => hero && hero.id === id),
+    this.store.dispatch(new DancerActions.GetDancer(id));
+    this.store.select(fromDancer.getSelectedDancer).pipe(
+      filter(dancer => dancer && dancer.id === id),
       take(1),
-      tap(hero => {
-        this.hero = { ...hero };
-        this.ratings = { ...hero.ratings };
+      tap(dancer => {
+        this.dancer = { ...dancer };
+        this.ratings = { ...dancer.ratings };
       })
     ).subscribe();
   }
@@ -52,12 +52,12 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    const hero: Dancer = {
-      ...this.hero,
+    const dancer: Dancer = {
+      ...this.dancer,
       ratings: {
         ...this.ratings
       }
     };
-    this.store.dispatch(new HeroActions.UpdateHero(hero));
+    this.store.dispatch(new DancerActions.UpdateDancer(dancer));
   }
 }

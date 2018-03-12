@@ -13,10 +13,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { HeroesComponent } from './heroes/heroes.component';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
-import { HeroService } from './hero.service';
+import { DancerDetailComponent } from './dancer-detail/dancer-detail.component';
+import { DancersComponent } from './dancers/dancers.component';
+import { DancerSearchComponent } from './dancer-search/dancer-search.component';
+import { DancerService } from './dancer.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
 import { StoreModule } from '@ngrx/store';
@@ -46,7 +46,7 @@ import { MaterialModule } from './material.module';
     StoreModule.forRoot(reducers, { metaReducers }),
 
     !environment.production ? StoreDevtoolsModule.instrument({
-      name: 'Tour of Heroes'
+      name: 'Tour of Dancers'
     }) : [],
 
     EffectsModule.forRoot([AppEffects]),
@@ -55,12 +55,12 @@ import { MaterialModule } from './material.module';
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroesComponent,
-    HeroDetailComponent,
+    DancersComponent,
+    DancerDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    DancerSearchComponent
   ],
-  providers: [HeroService, MessageService],
+  providers: [DancerService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
