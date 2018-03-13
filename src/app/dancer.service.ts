@@ -6,7 +6,6 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Dancer } from './models/dancer.model';
-import { MessageService } from './message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,8 +17,7 @@ export class DancerService {
   private dancersUrl = 'api/dancers';  // URL to web api
 
   constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+    private http: HttpClient) { }
 
   /** GET dancers from the server */
   getDancers(): Observable<Dancer[]> {
@@ -114,8 +112,6 @@ export class DancerService {
     };
   }
 
-  /** Log a DancerService message with the MessageService */
   private log(message: string) {
-    this.messageService.add('DancerService: ' + message);
   }
 }

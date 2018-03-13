@@ -17,8 +17,6 @@ import { DancerDetailComponent } from './dancer-detail/dancer-detail.component';
 import { DancersComponent } from './dancers/dancers.component';
 import { DancerSearchComponent } from './dancer-search/dancer-search.component';
 import { DancerService } from './dancer.service';
-import { MessageService } from './message.service';
-import { MessagesComponent } from './messages/messages.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -57,10 +55,9 @@ import { MaterialModule } from './material.module';
     DashboardComponent,
     DancersComponent,
     DancerDetailComponent,
-    MessagesComponent,
     DancerSearchComponent
   ],
-  providers: [DancerService, MessageService],
+  providers: [DancerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
