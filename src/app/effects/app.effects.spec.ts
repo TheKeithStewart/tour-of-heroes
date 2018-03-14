@@ -61,8 +61,7 @@ describe('AppService', () => {
         AppEffects,
         provideMockActions(() => actions$),
         { provide: DancerService, useClass: MockDancerService },
-        { provide: Actions, useFactory: getActions },
-
+        { provide: Actions, useFactory: getActions }
       ],
       imports: [
         RouterTestingModule
@@ -168,20 +167,20 @@ describe('AppService', () => {
   describe('search$', () => {
     beforeEach(() => {
       const testScheduler = getTestScheduler();
-      async.schedule = (work, delay, state) =>
-        testScheduler.schedule(work, delay, state);
+      async.schedule = (work, delay, state) => 
+        testScheduler.schedule(work, 30, state);
     });
 
-    it('should return a SearchSuccess, after a 300ms de-bounce, on success', () => {
+    it('should return a SearchSuccess, after a de-bounce, on success', () => {
       const dancer1 = { id: 1, name: 'test1' } as Dancer;
       const dancer2 = { id: 2, name: 'test2' } as Dancer;
       const dancers = [dancer1, dancer2];
-      const action = new Search('query');
+      const action = new Search('test');
       const completion = new SearchSuccess(dancers);
 
       actions$.stream = hot('-a', { a: action });
       const response = cold('-b|', { b: dancers });
-      const expected = cold('--------------------------------c', { c: completion });
+      const expected = cold('-----c', { c: completion });
       dancerService.searchDancers.and.returnValue(response);
 
       expect(effects.search$).toBeObservable(expected);
@@ -194,7 +193,7 @@ describe('AppService', () => {
 
       actions$.stream = hot('-a', { a: action });
       const response = cold('-#', {}, error);
-      const expected = cold('--------------------------------b', { b: completion });
+      const expected = cold('-----b', { b: completion });
       dancerService.searchDancers.and.returnValue(response);
 
       expect(effects.search$).toBeObservable(expected);
