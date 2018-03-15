@@ -75,8 +75,6 @@ describe('AppService', () => {
   });
 
   describe('loadDancers$', () => {
-
-    
     it('should return a LoadDancersSuccess, with dancers, on success', () => {
       // payload data
       const dancer1 = { id: 1, name: 'test1' } as Dancer;
@@ -96,9 +94,6 @@ describe('AppService', () => {
       expect(effects.loadDancers$).toBeObservable(expected);
     });
 
-
-
-
     it('should return a LoadDancersFail if there is a failure', () => {
       const error = 'Epic fail!!!';
       const action = new LoadDancers();
@@ -111,10 +106,6 @@ describe('AppService', () => {
 
       expect(effects.loadDancers$).toBeObservable(expected);
     });
-
-
-
-    
   });
 
   describe('getDancer$', () => {
