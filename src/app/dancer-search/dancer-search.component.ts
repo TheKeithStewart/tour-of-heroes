@@ -8,8 +8,6 @@ import { Dancer } from './../models/dancer.model';
 import * as fromDancer from './../reducers';
 import * as DancerActions from './../actions/dancer.actions';
 
-import { MaterialModule } from '../material.module';
-
 @Component({
   selector: 'app-dancer-search',
   templateUrl: './dancer-search.component.html',

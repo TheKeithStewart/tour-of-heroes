@@ -24,7 +24,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './effects/app.effects';
 
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   imports: [
