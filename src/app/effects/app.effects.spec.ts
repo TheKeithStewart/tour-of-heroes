@@ -75,13 +75,19 @@ describe('AppService', () => {
   });
 
   describe('loadDancers$', () => {
+
+    
     it('should return a LoadDancersSuccess, with dancers, on success', () => {
+      // payload data
       const dancer1 = { id: 1, name: 'test1' } as Dancer;
       const dancer2 = { id: 2, name: 'test2' } as Dancer;
       const dancers = [dancer1, dancer2];
+
+      // start action and completion action
       const action = new LoadDancers();
       const completion = new LoadDancersSuccess({ dancers: dancers });
 
+      // setup the Effect
       actions$.stream = hot('-a', { a: action });
       const response = cold('-b|', { b: dancers });
       const expected = cold('--c', { c: completion });
@@ -90,9 +96,12 @@ describe('AppService', () => {
       expect(effects.loadDancers$).toBeObservable(expected);
     });
 
+
+
+
     it('should return a LoadDancersFail if there is a failure', () => {
-      const action = new LoadDancers();
       const error = 'Epic fail!!!';
+      const action = new LoadDancers();
       const completion = new LoadDancersFail(error);
 
       actions$.stream = hot('-a', { a: action });
@@ -102,6 +111,10 @@ describe('AppService', () => {
 
       expect(effects.loadDancers$).toBeObservable(expected);
     });
+
+
+
+    
   });
 
   describe('getDancer$', () => {

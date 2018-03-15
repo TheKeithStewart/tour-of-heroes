@@ -34,6 +34,11 @@ import { DancerService } from './../dancer.service';
 
 @Injectable()
 export class AppEffects {
+
+
+
+
+
   @Effect()
   loadDancers$: Observable<Action> = this.actions$.pipe(
     ofType<LoadDancers>(DancerActionTypes.LoadDancers),
@@ -42,6 +47,11 @@ export class AppEffects {
       catchError(err => of(new LoadDancersFail(err)))
     ))
   );
+
+
+
+
+
 
   @Effect()
   getDancer$: Observable<Action> = this.actions$.pipe(
@@ -70,7 +80,6 @@ export class AppEffects {
   search$: Observable<Action> = this.actions$.pipe(
     ofType<Search>(DancerActionTypes.Search),
     debounceTime(300),
-    distinctUntilChanged(),
     concatMap((action: Search) => this.dancerService.searchDancers(action.payload).pipe(
       map(dancers => new SearchSuccess(dancers)),
       catchError(err => of(new SearchFail(err)))
