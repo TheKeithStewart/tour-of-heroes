@@ -25,6 +25,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './effects/app.effects';
 
 import { MaterialModule } from './material/material.module';
+import { DanceChallengeComponent } from './dance-challenge/dance-challenge.component';
 
 @NgModule({
   imports: [
@@ -55,7 +56,8 @@ import { MaterialModule } from './material/material.module';
     DashboardComponent,
     DancersComponent,
     DancerDetailComponent,
-    DancerSearchComponent
+    DancerSearchComponent,
+    DanceChallengeComponent
   ],
   providers: [DancerService],
   bootstrap: [AppComponent]
