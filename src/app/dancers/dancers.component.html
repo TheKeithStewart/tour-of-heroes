@@ -17,10 +17,14 @@
       {{dancer.name}}
     </mat-card-title>
 
-    <button mat-raised-button>
-      <a routerLink="/detail/{{dancer.id}}">edit</a>
+    <button mat-raised-button routerLink="/detail/{{dancer.id}}">
+      Edit
     </button>
 
+    <button mat-raised-button routerLink="/challenge/{{dancer.id}}">
+      Dance!
+    </button>
+    
     <button class="delete" (click)="delete(dancer)">
       <i class="material-icons">delete_forever</i>
     </button>
