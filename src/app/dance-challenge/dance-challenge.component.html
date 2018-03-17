@@ -20,3 +20,7 @@
     </div>
   </ng-container>
 </div>
+
+<div>
+  <button mat-raised-button [disabled]="!(challengersAreChosen$ | async)"> Battle! </button>
+</div>

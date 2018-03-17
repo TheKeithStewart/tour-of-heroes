@@ -16,6 +16,7 @@ export class DanceChallengeComponent implements OnInit, OnDestroy {
   challenger$: Observable<Dancer>;
   challengee$: Observable<Dancer>;
   potentialChallengees$: Observable<Dancer[]>;
+  challengersAreChosen$: Observable<boolean>;
 
   constructor(private route: ActivatedRoute, private store: Store<fromDancer.State>) { }
 
@@ -29,6 +30,7 @@ export class DanceChallengeComponent implements OnInit, OnDestroy {
     this.challenger$ = this.store.select(fromDancer.getSelectedChallenger);
     this.challengee$ = this.store.select(fromDancer.getSelectedChallengee);
     this.potentialChallengees$ = this.store.select(fromDancer.getPotentialChallengees);
+    this.challengersAreChosen$ = this.store.select(fromDancer.challengersAreChosen);
   }
 
   ngOnDestroy() {
