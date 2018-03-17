@@ -1,4 +1,4 @@
-import { DancerActions, DancerActionTypes } from './../actions/dancer.actions';
+import { SearchActions, SearchActionTypes } from './../actions/search.actions';
 
 export interface State {
   ids: number[];
@@ -14,9 +14,9 @@ export const initialState: State = {
   query: ''
 };
 
-export function reducer(state = initialState, action: DancerActions): State {
+export function reducer(state = initialState, action: SearchActions): State {
   switch (action.type) {
-    case DancerActionTypes.Search: {
+    case SearchActionTypes.Search: {
       const query = action.payload;
 
       if (query === '') {
@@ -36,7 +36,7 @@ export function reducer(state = initialState, action: DancerActions): State {
       };
     }
 
-    case DancerActionTypes.SearchSuccess: {
+    case SearchActionTypes.SearchSuccess: {
       return {
         ...state,
         ids: action.payload.map(dancer => dancer.id),
@@ -45,7 +45,7 @@ export function reducer(state = initialState, action: DancerActions): State {
       }
     }
 
-    case DancerActionTypes.SearchFail: {
+    case SearchActionTypes.SearchFail: {
       return {
         ...state,
         loading: false,

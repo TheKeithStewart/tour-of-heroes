@@ -25,20 +25,19 @@ import {
   UpsertDancer,
   UpdateDancer,
   UpdateDancerSuccess,
-  UpdateDancerFail,
-  Search,
-  SearchSuccess,
-  SearchFail
+  UpdateDancerFail
 } from './../actions/dancer.actions';
 import { DancerService } from './../dancer.service';
 
+import {
+  SearchActionTypes,
+  Search,
+  SearchSuccess,
+  SearchFail
+} from './../actions/search.actions';
+
 @Injectable()
 export class AppEffects {
-
-
-
-
-
   @Effect()
   loadDancers$: Observable<Action> = this.actions$.pipe(
     ofType<LoadDancers>(DancerActionTypes.LoadDancers),
@@ -47,11 +46,6 @@ export class AppEffects {
       catchError(err => of(new LoadDancersFail(err)))
     ))
   );
-
-
-
-
-
 
   @Effect()
   getDancer$: Observable<Action> = this.actions$.pipe(
@@ -78,7 +72,7 @@ export class AppEffects {
 
   @Effect()
   search$: Observable<Action> = this.actions$.pipe(
-    ofType<Search>(DancerActionTypes.Search),
+    ofType<Search>(SearchActionTypes.Search),
     debounceTime(300),
     concatMap((action: Search) => this.dancerService.searchDancers(action.payload).pipe(
       map(dancers => new SearchSuccess(dancers)),

@@ -19,10 +19,7 @@ export enum DancerActionTypes {
   LoadDancersFail = '[Dancer] Load Dancers Fail',
   GetDancer = '[Dancer] Get Dancer',
   GetDancerSuccess = '[Dancer] Get Dancer Success',
-  GetDancerFail = '[Dancer] Get Dancer Fail',
-  Search = '[Dancer] Search',
-  SearchSuccess = '[Dancer] Search Success',
-  SearchFail = '[Dancer] Search Fail'
+  GetDancerFail = '[Dancer] Get Dancer Fail'
 }
 
 export class AddDancer implements Action {
@@ -123,24 +120,6 @@ export class GetDancerFail implements Action {
   constructor(public payload: string) { }
 }
 
-export class Search implements Action {
-  readonly type = DancerActionTypes.Search;
-
-  constructor(public payload: string) { }
-}
-
-export class SearchSuccess implements Action {
-  readonly type = DancerActionTypes.SearchSuccess;
-
-  constructor(public payload: Dancer[]) { }
-}
-
-export class SearchFail implements Action {
-  readonly type = DancerActionTypes.SearchFail;
-
-  constructor(public payload: string) { }
-}
-
 export type DancerActions =
   LoadDancersSuccess
   | AddDancer
@@ -158,7 +137,4 @@ export type DancerActions =
   | LoadDancersFail
   | GetDancer
   | GetDancerSuccess
-  | GetDancerFail
-  | Search
-  | SearchSuccess
-  | SearchFail;
+  | GetDancerFail;

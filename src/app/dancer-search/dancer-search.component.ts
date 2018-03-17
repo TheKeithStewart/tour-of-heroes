@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-
 import { Observable } from 'rxjs/Observable';
 
 import { Dancer } from './../models/dancer.model';
-
 import * as fromDancer from './../reducers';
-import * as DancerActions from './../actions/dancer.actions';
+import * as SearchActions from './../actions/search.actions';
 
 @Component({
   selector: 'app-dancer-search',
@@ -20,7 +18,7 @@ export class DancerSearchComponent implements OnInit {
 
   // Push a search term into the observable stream.
   search(term: string): void {
-    this.store.dispatch(new DancerActions.Search(term));
+    this.store.dispatch(new SearchActions.Search(term));
   }
 
   ngOnInit(): void {

@@ -22,11 +22,14 @@ import {
   GetDancerFail,
   UpdateDancer,
   UpdateDancerSuccess,
-  UpdateDancerFail,
+  UpdateDancerFail
+} from './../actions/dancer.actions';
+
+import {
   Search,
   SearchSuccess,
   SearchFail
-} from './../actions/dancer.actions';
+} from './../actions/search.actions';
 
 export class TestActions extends Actions {
   constructor() {
