@@ -39,6 +39,13 @@ export function reducer(state = initialState, action: ChallengeActions): State {
     }
 
     case ChallengeActionTypes.Battle: {
+      // if challengers have not been chosen then just return same state
+      if (!state.challengerId || !state.challengeeId) {
+        return {
+          ...state
+        }
+      }
+
       return {
         ...state,
         battleInProgress: true
