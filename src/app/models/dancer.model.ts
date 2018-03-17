@@ -1,4 +1,4 @@
-export interface Dancer {
+export class Dancer {
   id: number;
   name: string;
   ratings: {

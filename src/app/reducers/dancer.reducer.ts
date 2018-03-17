@@ -23,7 +23,10 @@ export function reducer(
 ): State {
   switch (action.type) {
     case DancerActionTypes.AddDancer: {
-      return adapter.addOne(action.payload.dancer, state);
+      const nextId = state.ids.length > 0 ? Math.max(...state.ids as number[]) + 1 : 0;
+      const dancer: Dancer = { ...action.payload.dancer, id: nextId };
+
+      return adapter.addOne(dancer, state);
     }
 
     case DancerActionTypes.UpsertDancer: {

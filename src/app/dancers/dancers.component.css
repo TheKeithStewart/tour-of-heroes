@@ -16,3 +16,7 @@ button:hover {
 .mat-column-actions {
   text-align: right;
 }
+
+.mat-column-id {
+  max-width: 100px;
+}
