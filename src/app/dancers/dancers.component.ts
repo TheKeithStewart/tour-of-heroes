@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { Dancer } from './../models/dancer.model';
 import * as fromDancer from './../reducers';
 import * as DancerActions from './../actions/dancer.actions';
+import { DancerDataSource } from './dancers-data-source';
 
 @Component({
   selector: 'app-dancers',
@@ -12,17 +12,20 @@ import * as DancerActions from './../actions/dancer.actions';
   styleUrls: ['./dancers.component.css']
 })
 export class DancersComponent implements OnInit {
-  dancers$: Observable<Dancer[]>;
   dancerIds: number[] = [];
+
+  dataSource: DancerDataSource | null;
+  columns = ['name', 'actions'];
 
   constructor(private store: Store<fromDancer.State>) { }
 
   ngOnInit() {
     this.getDancers();
+
+    this.dataSource = new DancerDataSource(this.store);
   }
 
   getDancers(): void {
-    this.dancers$ = this.store.select(fromDancer.getAllDancers);
     // TODO: need to manage this subscription better (#7)
     this.store.select(fromDancer.getDancerIdState)
       .subscribe((ids: number[]) => this.dancerIds = ids);

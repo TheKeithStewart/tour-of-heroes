@@ -5,16 +5,6 @@
   width: 15em;
 }
 
-mat-card {
-  background-color: lavenderblush;
-  margin-bottom: 5px;
-}
-
-a {
-  color: #888;
-  text-decoration: none;
-}
-
 button {
 margin-left: 5px;
 }
@@ -23,9 +13,6 @@ button:hover {
   background-color: lightblue;
 }
 
-button.delete {
-  margin-left: 1150px;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
+.mat-column-actions {
+  text-align: right;
 }

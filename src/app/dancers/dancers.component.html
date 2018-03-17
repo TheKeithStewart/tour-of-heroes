@@ -11,22 +11,27 @@
   </button>
 </div>
 
-<mat-card *ngFor="let dancer of dancers$ | async">
-  <mat-card-content>
-    <mat-card-title>
-      {{dancer.name}}
-    </mat-card-title>
+<div>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let dancer"> {{ dancer.name }} </mat-cell>
+    </ng-container>
 
-    <button mat-raised-button routerLink="/detail/{{dancer.id}}">
-      Edit
-    </button>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let dancer">
+        <button mat-icon-button routerLink="/detail/{{dancer.id}}">
+          <mat-icon>settings</mat-icon>
+        </button>
 
-    <button mat-raised-button routerLink="/challenge/{{dancer.id}}">
-      Dance!
-    </button>
-    
-    <button class="delete" (click)="delete(dancer)">
-      <i class="material-icons">delete_forever</i>
-    </button>
-  </mat-card-content>
-</mat-card>
+        <button mat-icon-button routerLink="/challenge/{{dancer.id}}">
+          <mat-icon>flash_on</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let dancer; columns: columns"></mat-row>
+  </mat-table>
+</div>
