@@ -85,10 +85,14 @@ export const getPotentialChallengees = createSelector(
     return selectedId && dancers.filter(dancer => dancer.id != selectedId);
   }
 );
-export const challengersAreChosen = createSelector(
+export const getChallengersAreChosen = createSelector(
   getSelectedChallengerId,
   getSelectedChallengeeId,
   (challengerId, challengeeId) => challengerId && challengeeId ? true : false
+);
+export const getBattleInProgress = createSelector(
+  getChallengeState,
+  fromChallenge.getBattleInProgress
 );
 
 export const getSearchDancerIds = createSelector(

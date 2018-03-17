@@ -24,3 +24,7 @@
 <div>
   <button mat-raised-button [disabled]="!(challengersAreChosen$ | async)" (click)="battle()"> Battle! </button>
 </div>
+
+<div *ngIf="battleInProgress$ | async">
+  Battle in progress!!!
+</div>

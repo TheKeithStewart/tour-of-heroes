@@ -52,3 +52,4 @@ export function reducer(state = initialState, action: ChallengeActions): State {
 
 export const getChallengerId = (state: State) => state.challengerId;
 export const getChallengeeId = (state: State) => state.challengeeId;
+export const getBattleInProgress = (state: State) => state.battleInProgress;
