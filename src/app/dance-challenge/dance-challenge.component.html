@@ -22,5 +22,5 @@
 </div>
 
 <div>
-  <button mat-raised-button [disabled]="!(challengersAreChosen$ | async)"> Battle! </button>
+  <button mat-raised-button [disabled]="!(challengersAreChosen$ | async)" (click)="battle()"> Battle! </button>
 </div>

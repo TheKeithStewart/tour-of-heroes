@@ -35,10 +35,14 @@ export class DanceChallengeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // clear the challenge
-    this.store.dispatch(new ChallengeActions.ClearChallenge);
+    this.store.dispatch(new ChallengeActions.ClearChallenge());
   }
 
   setChallengee(id: number) {
     this.store.dispatch(new ChallengeActions.SetChallengee(id));
+  }
+
+  battle() {
+    this.store.dispatch(new ChallengeActions.Battle());
   }
 }

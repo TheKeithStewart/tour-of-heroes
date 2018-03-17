@@ -4,12 +4,14 @@ import { ChallengeActions, ChallengeActionTypes } from './../actions/challenge.a
 
 export interface State {
   challengerId: number | null,
-  challengeeId: number | null
+  challengeeId: number | null,
+  battleInProgress: boolean
 }
 
 export const initialState: State = {
   challengerId: null,
-  challengeeId: null
+  challengeeId: null,
+  battleInProgress: false
 };
 
 export function reducer(state = initialState, action: ChallengeActions): State {
@@ -33,6 +35,13 @@ export function reducer(state = initialState, action: ChallengeActions): State {
         ...state,
         challengerId: null,
         challengeeId: null
+      }
+    }
+
+    case ChallengeActionTypes.Battle: {
+      return {
+        ...state,
+        battleInProgress: true
       }
     }
 
