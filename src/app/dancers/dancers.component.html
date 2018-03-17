@@ -28,6 +28,10 @@
         <button mat-icon-button routerLink="/challenge/{{dancer.id}}">
           <mat-icon>flash_on</mat-icon>
         </button>
+
+        <button mat-icon-button (click)="delete(dancer)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
