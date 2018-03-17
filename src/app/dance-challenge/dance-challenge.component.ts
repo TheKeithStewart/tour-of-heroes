@@ -14,6 +14,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class DanceChallengeComponent implements OnInit, OnDestroy {
   challenger$: Observable<Dancer>;
+  challengee$: Observable<Dancer>;
+  potentialChallengees$: Observable<Dancer[]>;
 
   constructor(private route: ActivatedRoute, private store: Store<fromDancer.State>) { }
 
@@ -23,12 +25,18 @@ export class DanceChallengeComponent implements OnInit, OnDestroy {
       this.store.dispatch(new ChallengeActions.SetChallenger(+params.id));
     });
 
-    // select the challenger
+    // select the challenger, array of potential challengees, and challengee
     this.challenger$ = this.store.select(fromDancer.getSelectedChallenger);
+    this.challengee$ = this.store.select(fromDancer.getSelectedChallengee);
+    this.potentialChallengees$ = this.store.select(fromDancer.getPotentialChallengees);
   }
 
   ngOnDestroy() {
     // clear the challenge
     this.store.dispatch(new ChallengeActions.ClearChallenge);
+  }
+
+  setChallengee(id: number) {
+    this.store.dispatch(new ChallengeActions.SetChallengee(id));
   }
 }

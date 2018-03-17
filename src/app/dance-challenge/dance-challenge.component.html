@@ -1,5 +1,22 @@
+<div>
+  <mat-select (change)="setChallengee($event.value)" placeholder="Choose a Challengee">
+    <mat-option *ngFor="let dancer of potentialChallengees$ | async" [value]="dancer.id">
+      {{ dancer.name }}
+    </mat-option>
+  </mat-select>
+</div>
+
 <div class="container">
   <div class="dancer">
     {{ (challenger$ | async)?.name }}
   </div>
+
+  <!-- Only display the VS. section if a challengee has been selected -->
+  <ng-container *ngIf="challengee$ | async as challengee">
+    <div>Vs.</div>
+  
+    <div class="dancer right-align">
+      {{ challengee?.name }}
+    </div>
+  </ng-container>
 </div>

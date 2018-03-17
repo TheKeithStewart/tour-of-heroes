@@ -1,27 +1,33 @@
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule } from '@angular/material';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatTableModule } from '@angular/material/table';
-
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatMenuModule,
+  MatDialogModule,
+  MatGridListModule,
+  MatTableModule,
+  MatSelectModule
+} from '@angular/material';
 
 @NgModule({
-    exports: [
-        MatAutocompleteModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatToolbarModule,
-        MatCardModule,
-        MatMenuModule,
-        MatGridListModule,
-        MatDialogModule,
-        MatInputModule,
-        MatIconModule,
-        MatTableModule
-    ]
+  exports: [
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatMenuModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatInputModule,
+    MatIconModule,
+    MatTableModule,
+    MatSelectModule
+  ]
 })
 export class MaterialModule { }

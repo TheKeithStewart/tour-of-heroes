@@ -21,6 +21,13 @@ export function reducer(state = initialState, action: ChallengeActions): State {
       }
     }
 
+    case ChallengeActionTypes.SetChallengee: {
+      return {
+        ...state,
+        challengeeId: action.payload
+      }
+    }
+
     case ChallengeActionTypes.ClearChallenge: {
       return {
         ...state,
@@ -35,3 +42,4 @@ export function reducer(state = initialState, action: ChallengeActions): State {
 }
 
 export const getChallengerId = (state: State) => state.challengerId;
+export const getChallengeeId = (state: State) => state.challengeeId;

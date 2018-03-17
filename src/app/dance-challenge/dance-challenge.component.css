@@ -1,7 +1,11 @@
 .container {
-    display: flex;
+  display: flex;
 }
 
 .dancer {
-    flex: 1;
+  flex: 1;
+}
+
+.right-align {
+  text-align: right;
 }

@@ -64,7 +64,25 @@ export const getSelectedChallenger = createSelector(
   getDancerEntityState,
   getSelectedChallengerId,
   (entities, selectedId) => {
-    return selectedId && entities[selectedId]
+    return selectedId && entities[selectedId];
+  }
+);
+export const getSelectedChallengeeId = createSelector(
+  getChallengeState,
+  fromChallenge.getChallengeeId
+);
+export const getSelectedChallengee = createSelector(
+  getDancerEntityState,
+  getSelectedChallengeeId,
+  (entities, selectedId) => {
+    return selectedId && entities[selectedId];
+  }
+);
+export const getPotentialChallengees = createSelector(
+  getAllDancers,
+  getSelectedChallengerId,
+  (dancers, selectedId) => {
+    return selectedId && dancers.filter(dancer => dancer.id != selectedId);
   }
 );
 
