@@ -1,0 +1,7 @@
+.container {
+    display: flex;
+}
+
+.dancer {
+    flex: 1;
+}

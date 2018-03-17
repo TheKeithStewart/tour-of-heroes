@@ -10,15 +10,18 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../environments/environment';
 import * as fromDancer from './dancer.reducer';
 import * as fromSearch from './search.reducer';
+import * as fromChallenge from './challenge.reducer';
 
 export interface State {
   dancers: fromDancer.State;
   search: fromSearch.State;
+  challenge: fromChallenge.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   dancers: fromDancer.reducer,
   search: fromSearch.reducer,
+  challenge: fromChallenge.reducer,
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production
@@ -27,6 +30,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
 
 export const getDancerState = createFeatureSelector<fromDancer.State>('dancers');
 export const getSearchState = createFeatureSelector<fromSearch.State>('search');
+export const getChallengeState = createFeatureSelector<fromChallenge.State>('challenge');
 
 export const {
   selectIds: getDancerIdState,
@@ -47,6 +51,18 @@ export const getSelectedDancerId = createSelector(
 export const getSelectedDancer = createSelector(
   getDancerEntityState,
   getSelectedDancerId,
+  (entities, selectedId) => {
+    return selectedId && entities[selectedId]
+  }
+);
+
+export const getSelectedChallengerId = createSelector(
+  getChallengeState,
+  fromChallenge.getChallengerId
+);
+export const getSelectedChallenger = createSelector(
+  getDancerEntityState,
+  getSelectedChallengerId,
   (entities, selectedId) => {
     return selectedId && entities[selectedId]
   }
