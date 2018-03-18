@@ -96,21 +96,21 @@ export class DancerService {
    * the winner by seeing which dancer wins the most total categories.
    */
   determineBattleWinnerByCategory(challenger: Dancer, challengee: Dancer): BattleOutcome {
-    let challengerWins = 0;
-    let challengeeWins = 0;
+    let challengerWinCount = 0;
+    let challengeeWinCount = 0;
     
     Object.keys(challenger.ratings).forEach(key => {
       if (challenger.ratings[key] > challengee.ratings[key]) {
-        challengerWins++;
+        challengerWinCount++;
       } else if (challenger.ratings[key] < challengee.ratings[key]) {
-        challengeeWins++;
+        challengeeWinCount++;
       }
     });
 
     let result: BattleOutcome = BattleOutcome.Tie;
-    if (challengerWins > challengeeWins) {
+    if (challengerWinCount > challengeeWinCount) {
       result = BattleOutcome.ChallengerWins;
-    } else if (challengerWins < challengeeWins) {
+    } else if (challengerWinCount < challengeeWinCount) {
       result = BattleOutcome.ChallengeeWins;
     }
 
