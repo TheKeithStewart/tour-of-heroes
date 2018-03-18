@@ -12,12 +12,14 @@ export interface State {
   challengerId: number | null,
   challengeeId: number | null,
   battleInProgress: boolean
+  battleOutcome: BattleOutcome
 }
 
 export const initialState: State = {
   challengerId: null,
   challengeeId: null,
-  battleInProgress: false
+  battleInProgress: false,
+  battleOutcome: null
 };
 
 export function reducer(state = initialState, action: ChallengeActions): State {
@@ -55,6 +57,22 @@ export function reducer(state = initialState, action: ChallengeActions): State {
       return {
         ...state,
         battleInProgress: true
+      }
+    }
+
+    case ChallengeActionTypes.BattleOutcomeDetermined: {
+      return {
+        ...state,
+        battleInProgress: false,
+        battleOutcome: action.payload
+      }
+    }
+
+    case ChallengeActionTypes.BattleOutcomeClear: {
+      return {
+        ...state,
+        battleInProgress: false,
+        battleOutcome: null
       }
     }
 
