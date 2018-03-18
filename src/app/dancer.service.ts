@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Dancer } from './models/dancer.model';
+import { BattleOutcome } from './reducers/challenge.reducer';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,15 +16,14 @@ export class DancerService {
 
   private dancersUrl = 'api/dancers';  // URL to web api
 
-  constructor(
-    private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   /** GET dancers from the server */
   getDancers(): Observable<Dancer[]> {
     return this.http.get<Dancer[]>(this.dancersUrl)
       .pipe(
-      tap(dancers => this.log(`fetched dancers`)),
-      catchError(this.handleError('getDancers', []))
+        tap(dancers => this.log(`fetched dancers`)),
+        catchError(this.handleError('getDancers', []))
       );
   }
 
@@ -33,12 +32,12 @@ export class DancerService {
     const url = `${this.dancersUrl}/?id=${id}`;
     return this.http.get<Dancer[]>(url)
       .pipe(
-      map(dancers => dancers[0]), // returns a {0|1} element array
-      tap(h => {
-        const outcome = h ? `fetched` : `did not find`;
-        this.log(`${outcome} dancer id=${id}`);
-      }),
-      catchError(this.handleError<Dancer>(`getDancer id=${id}`))
+        map(dancers => dancers[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? `fetched` : `did not find`;
+          this.log(`${outcome} dancer id=${id}`);
+        }),
+        catchError(this.handleError<Dancer>(`getDancer id=${id}`))
       );
   }
 
@@ -90,6 +89,32 @@ export class DancerService {
       tap(_ => this.log(`updated dancer id=${dancer.id}`)),
       catchError(this.handleError<any>('updateDancer'))
     );
+  }
+
+  /**
+   * Compare each of the dance rating categories for the two given dancers. Determine
+   * the winner by seeing which dancer wins the most total categories.
+   */
+  determineBattleWinnerByCategory(challenger: Dancer, challengee: Dancer): BattleOutcome {
+    let challengerWins = 0;
+    let challengeeWins = 0;
+    
+    Object.keys(challenger.ratings).forEach(key => {
+      if (challenger.ratings[key] > challengee.ratings[key]) {
+        challengerWins++;
+      } else if (challenger.ratings[key] < challengee.ratings[key]) {
+        challengeeWins++;
+      }
+    });
+
+    let result: BattleOutcome = BattleOutcome.Tie;
+    if (challengerWins > challengeeWins) {
+      result = BattleOutcome.ChallengerWins;
+    } else if (challengerWins < challengeeWins) {
+      result = BattleOutcome.ChallengeeWins;
+    }
+
+    return result;
   }
 
   /**

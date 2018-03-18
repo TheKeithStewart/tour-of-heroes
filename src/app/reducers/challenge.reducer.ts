@@ -2,6 +2,12 @@ import { Action } from '@ngrx/store';
 
 import { ChallengeActions, ChallengeActionTypes } from './../actions/challenge.actions';
 
+export enum BattleOutcome {
+  Tie = 0,
+  ChallengerWins = 1,
+  ChallengeeWins = 2
+}
+
 export interface State {
   challengerId: number | null,
   challengeeId: number | null,
