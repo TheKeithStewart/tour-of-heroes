@@ -42,7 +42,9 @@ export function reducer(state = initialState, action: ChallengeActions): State {
       return {
         ...state,
         challengerId: null,
-        challengeeId: null
+        challengeeId: null, 
+        battleInProgress: false,
+        battleOutcome: null
       }
     }
 

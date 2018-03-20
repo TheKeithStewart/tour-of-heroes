@@ -6,6 +6,7 @@ import * as fromDancer from './../reducers';
 import * as ChallengeActions from './../actions/challenge.actions';
 import { Dancer } from '../models/dancer.model';
 import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dance-challenge',
@@ -13,6 +14,8 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./dance-challenge.component.css']
 })
 export class DanceChallengeComponent implements OnInit, OnDestroy {
+  challenger: Dancer;
+  challengee: Dancer;
   challenger$: Observable<Dancer>;
   challengee$: Observable<Dancer>;
   potentialChallengees$: Observable<Dancer[]>;
@@ -28,8 +31,12 @@ export class DanceChallengeComponent implements OnInit, OnDestroy {
     });
 
     // select the challenger, array of potential challengees, and challengee
-    this.challenger$ = this.store.select(fromDancer.getSelectedChallenger);
-    this.challengee$ = this.store.select(fromDancer.getSelectedChallengee);
+    this.challenger$ = this.store.select(fromDancer.getSelectedChallenger).pipe(
+      tap(dancer => this.challenger = dancer)
+    );
+    this.challengee$ = this.store.select(fromDancer.getSelectedChallengee).pipe(
+      tap(dancer => this.challengee = dancer)
+    );
     this.potentialChallengees$ = this.store.select(fromDancer.getPotentialChallengees);
     this.challengersAreChosen$ = this.store.select(fromDancer.getChallengersAreChosen);
     this.battleInProgress$ = this.store.select(fromDancer.getBattleInProgress);
@@ -45,6 +52,9 @@ export class DanceChallengeComponent implements OnInit, OnDestroy {
   }
 
   battle() {
-    this.store.dispatch(new ChallengeActions.Battle());
+    this.store.dispatch(new ChallengeActions.Battle({
+      challenger: this.challenger,
+      challengee: this.challengee
+    }));
   }
 }

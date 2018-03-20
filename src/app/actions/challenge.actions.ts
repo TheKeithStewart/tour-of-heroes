@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { BattleOutcome } from '../reducers/challenge.reducer';
+import { Dancer } from '../models/dancer.model';
 
 export enum ChallengeActionTypes {
   SetChallenger = '[Challenge] Set Challenger',
@@ -8,6 +9,7 @@ export enum ChallengeActionTypes {
   ClearChallenge = '[Challenge] Clear Challenge',
   Battle = '[Challenge] Battle!',
   BattleOutcomeDetermined = '[Challenge] Battle Outcome Determined!',
+  BattleFail = '[Challenge] Battle Fail',
   BattleOutcomeClear = '[Challenge] Battle Outcome Clear'
 }
 
@@ -29,12 +31,20 @@ export class ClearChallenge implements Action {
 
 export class Battle implements Action {
   readonly type = ChallengeActionTypes.Battle;
+
+  constructor(public payload: { challenger: Dancer, challengee: Dancer }) { }
 }
 
 export class BattleOutcomeDetermined implements Action {
   readonly type = ChallengeActionTypes.BattleOutcomeDetermined;
 
   constructor(public payload: BattleOutcome) { }
+}
+
+export class BattleFail implements Action {
+  readonly type = ChallengeActionTypes.BattleFail;
+
+  constructor(public payload: string) { }
 }
 
 export class BattleOutcomeClear implements Action {
@@ -47,4 +57,5 @@ export type ChallengeActions =
   | ClearChallenge
   | Battle
   | BattleOutcomeDetermined
+  | BattleFail
   | BattleOutcomeClear;
