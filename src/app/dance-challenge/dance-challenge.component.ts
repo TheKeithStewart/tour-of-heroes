@@ -54,7 +54,8 @@ export class DanceChallengeComponent implements OnInit, OnDestroy {
   battle() {
     this.store.dispatch(new ChallengeActions.Battle({
       challenger: this.challenger,
-      challengee: this.challengee
+      challengee: this.challengee,
+      delay: 5000
     }));
   }
 }

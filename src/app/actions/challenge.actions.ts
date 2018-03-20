@@ -32,7 +32,7 @@ export class ClearChallenge implements Action {
 export class Battle implements Action {
   readonly type = ChallengeActionTypes.Battle;
 
-  constructor(public payload: { challenger: Dancer, challengee: Dancer }) { }
+  constructor(public payload: { challenger: Dancer, challengee: Dancer, delay?: number }) { }
 }
 
 export class BattleOutcomeDetermined implements Action {
