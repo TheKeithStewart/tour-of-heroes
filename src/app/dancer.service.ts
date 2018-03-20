@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
+import { _throw } from 'rxjs/observable/throw';
 
 import { Dancer } from './models/dancer.model';
 import { BattleOutcome } from './reducers/challenge.reducer';
@@ -95,26 +96,30 @@ export class DancerService {
    * Compare each of the dance rating categories for the two given dancers. Determine
    * the winner by seeing which dancer wins the most total categories.
    */
-  determineBattleWinnerByCategory(challenger: Dancer, challengee: Dancer): BattleOutcome {
-    let challengerWinCount = 0;
-    let challengeeWinCount = 0;
-    
-    Object.keys(challenger.ratings).forEach(key => {
-      if (challenger.ratings[key] > challengee.ratings[key]) {
-        challengerWinCount++;
-      } else if (challenger.ratings[key] < challengee.ratings[key]) {
-        challengeeWinCount++;
+  determineBattleWinnerByCategory(challenger: Dancer, challengee: Dancer): Observable<BattleOutcome> {
+    try {
+      let challengerWinCount = 0;
+      let challengeeWinCount = 0;
+      
+      Object.keys(challenger.ratings).forEach(key => {
+        if (challenger.ratings[key] > challengee.ratings[key]) {
+          challengerWinCount++;
+        } else if (challenger.ratings[key] < challengee.ratings[key]) {
+          challengeeWinCount++;
+        }
+      });
+  
+      let result: BattleOutcome = BattleOutcome.Tie;
+      if (challengerWinCount > challengeeWinCount) {
+        result = BattleOutcome.ChallengerWins;
+      } else if (challengerWinCount < challengeeWinCount) {
+        result = BattleOutcome.ChallengeeWins;
       }
-    });
-
-    let result: BattleOutcome = BattleOutcome.Tie;
-    if (challengerWinCount > challengeeWinCount) {
-      result = BattleOutcome.ChallengerWins;
-    } else if (challengerWinCount < challengeeWinCount) {
-      result = BattleOutcome.ChallengeeWins;
+  
+      return of(result);
+    } catch(e) {
+      return _throw(e);
     }
-
-    return result;
   }
 
   /**
