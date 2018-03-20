@@ -9,3 +9,11 @@
 .right-align {
   text-align: right;
 }
+
+mat-form-field {
+  margin-top: 10px;
+}
+
+h1 {
+  color: purple;
+}
