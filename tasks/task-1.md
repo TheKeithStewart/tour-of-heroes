@@ -7,7 +7,7 @@
 
 ### Description ###
 
-When a `Battle` action is dispatched the dance battle begins. The winner is determined by executing the DancerService.determineBattleWinnerByCategory() function. The result of that function should be included as the payload of the BattleOutcomeDetermined action completing the effect.
+When a `Battle` action is dispatched the dance battle begins. The winner is determined by executing the DancerService.determineBattleWinnerByCategory() function. The result of that function should be included as the payload of the `BattleOutcomeDetermined` action completing the effect.
 
 ### Steps ###
 
