@@ -52,7 +52,7 @@ class MockDancerService {
   searchDancers = jasmine.createSpy('searchDancers');
 }
 
-describe('AppService', () => {
+describe('AppEffects', () => {
   let actions$: TestActions;
   let effects: AppEffects;
   let dancerService: any;
