@@ -1,5 +1,6 @@
 import { reducer, State } from './challenge.reducer';
 import { Battle } from '../actions/challenge.actions';
+import { Dancer } from '../models/dancer.model';
 
 describe('Challenge Reducer', () => {
   describe('unknown action', () => {
@@ -8,27 +9,32 @@ describe('Challenge Reducer', () => {
       const initialState: State = {
         challengerId: null,
         challengeeId: null,
-        battleInProgress: false
+        battleInProgress: false,
+        battleOutcome: null
       };
 
       const result = reducer(initialState, action);
-
       expect(result).toBe(initialState);
     });
   });
 
   describe('Battle', () => {
+    const dancer1 = new Dancer();
+    const dancer2 = new Dancer();
+
     it('should set battleInProgress to true if challengers have been selected', () => {
       const initialState: State = {
         challengerId: 1,
         challengeeId: 2,
-        battleInProgress: false
+        battleInProgress: false,
+        battleOutcome: null
       };
-      const action = new Battle();
+      const action = new Battle({ challenger: dancer1, challengee: dancer2 });
       const expectedResult: State = {
         challengerId: 1,
         challengeeId: 2,
-        battleInProgress: true
+        battleInProgress: true,
+        battleOutcome: null
       }
       
       const result = reducer(initialState, action);
@@ -39,9 +45,10 @@ describe('Challenge Reducer', () => {
       const initialState: State = {
         challengerId: null,
         challengeeId: 2,
-        battleInProgress: false
+        battleInProgress: false,
+        battleOutcome: null
       };
-      const action = new Battle();
+      const action = new Battle({ challenger: dancer1, challengee: dancer2 });
       
       const result = reducer(initialState, action);
       expect(result).toEqual(initialState);
@@ -51,9 +58,10 @@ describe('Challenge Reducer', () => {
       const initialState: State = {
         challengerId: 1,
         challengeeId: null,
-        battleInProgress: false
+        battleInProgress: false,
+        battleOutcome: null
       };
-      const action = new Battle();
+      const action = new Battle({ challenger: dancer1, challengee: dancer2 });
       
       const result = reducer(initialState, action);
       expect(result).toEqual(initialState);
