@@ -94,6 +94,10 @@ export const getBattleInProgress = createSelector(
   getChallengeState,
   fromChallenge.getBattleInProgress
 );
+export const getBattleOutcome = createSelector(
+  getChallengeState,
+  fromChallenge.getBattleOutcome
+);
 
 export const getSearchDancerIds = createSelector(
   getSearchState,

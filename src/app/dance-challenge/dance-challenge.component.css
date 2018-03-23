@@ -17,3 +17,8 @@ mat-form-field {
 h1 {
   color: purple;
 }
+
+.profile-image {
+  height: 50px;
+  width: 50px;
+}
