@@ -7,4 +7,8 @@ export class Dancer {
     worm: number;
     disco: number;
   }
+  images: {
+    profileUrl: string;
+    danceUrl: string;
+  }
 }

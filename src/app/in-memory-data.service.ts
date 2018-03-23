@@ -10,14 +10,22 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
-        id: 2, name: 'Micheal Jackson', ratings: {
+        id: 2, name: 'Michael Jackson', ratings: {
           moonwalk: 10,
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
@@ -26,6 +34,10 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
@@ -34,6 +46,10 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
@@ -42,6 +58,10 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
@@ -50,6 +70,10 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
@@ -58,6 +82,10 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
@@ -66,6 +94,10 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
@@ -74,6 +106,10 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       },
       {
@@ -82,6 +118,10 @@ export class InMemoryDataService implements InMemoryDbService {
           sprinkler: 2,
           worm: 3,
           disco: 4
+        },
+        images: {
+          profileUrl: 'assets/testPic.png',
+          danceUrl: 'assets/testPic2.png'
         }
       }
     ];
