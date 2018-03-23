@@ -4,6 +4,7 @@ h1 {
   color: #999;
   margin-bottom: 0;
 }
+
 h2 {
   font-size: 2em;
   margin-top: 0;
@@ -26,4 +27,8 @@ button:hover {
 
 .click {
   background-color: green;
+}
+
+.container {
+  margin: 2em;
 }

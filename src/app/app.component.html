@@ -1,4 +1,6 @@
-<mat-toolbar>{{ title }}
+<mat-toolbar>
+  <span>{{ title }}</span>
+
   <nav>
     <button mat-raised-button class="dancers" (click)="dancers()">
       Dancers
@@ -9,4 +11,7 @@
 
   </nav>
 </mat-toolbar>
-<router-outlet></router-outlet>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
