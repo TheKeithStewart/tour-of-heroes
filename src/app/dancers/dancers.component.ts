@@ -13,7 +13,7 @@ import { DancerDataSource } from './dancers-data-source';
 })
 export class DancersComponent implements OnInit {
   dataSource: DancerDataSource | null;
-  columns = ['id', 'name', 'actions'];
+  columns = ['id', 'image', 'name', 'actions'];
 
   constructor(private store: Store<fromDancer.State>) { }
 

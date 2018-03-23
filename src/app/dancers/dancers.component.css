@@ -20,3 +20,8 @@ button:hover {
 .mat-column-id {
   max-width: 100px;
 }
+
+img {
+  height: 30px;
+  width: 30px;
+}
