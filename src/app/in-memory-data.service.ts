@@ -12,7 +12,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/madonna.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -24,7 +24,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/michealJackson.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -36,7 +36,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/axelRose.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -48,7 +48,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/susannaHoffs.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -60,7 +60,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/debbieHarry.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -72,7 +72,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/davidBowie.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -84,7 +84,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/mickJagger.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -96,7 +96,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/stevieNicks.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -108,7 +108,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/eltonJohn.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       },
@@ -120,7 +120,7 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
+          profileUrl: 'assets/jamesHetfield.jpg',
           danceUrl: 'assets/testPic2.png'
         }
       }
