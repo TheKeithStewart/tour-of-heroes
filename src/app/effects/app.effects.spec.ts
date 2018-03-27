@@ -10,7 +10,7 @@ import { empty } from 'rxjs/observable/empty';
 
 import { async } from 'rxjs/scheduler/async';
 
-import { AppEffects } from './app.effects';
+import { AppEffects, SCHEDULER, DEBOUNCE } from './app.effects';
 import { DancerService } from './../dancer.service';
 import { Dancer } from './../models/dancer.model';
 import {
@@ -64,7 +64,9 @@ describe('AppEffects', () => {
         AppEffects,
         provideMockActions(() => actions$),
         { provide: DancerService, useClass: MockDancerService },
-        { provide: Actions, useFactory: getActions }
+        { provide: Actions, useFactory: getActions },
+        { provide: DEBOUNCE, useValue: 30 },
+        { provide: SCHEDULER, useFactory: getTestScheduler }
       ],
       imports: [
         RouterTestingModule
@@ -172,12 +174,6 @@ describe('AppEffects', () => {
   });
 
   describe('search$', () => {
-    beforeEach(() => {
-      const testScheduler = getTestScheduler();
-      async.schedule = (work, delay, state) => 
-        testScheduler.schedule(work, 30, state);
-    });
-
     it('should return a SearchSuccess, after a de-bounce, on success', () => {
       const dancer1 = { id: 1, name: 'test1' } as Dancer;
       const dancer2 = { id: 2, name: 'test2' } as Dancer;

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, InjectionToken, Optional, Inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
@@ -13,6 +13,8 @@ import {
 } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';
+import { Scheduler } from 'rxjs/Scheduler';
+import { async } from 'rxjs/scheduler/async';
 
 import {
   DancerActionTypes,
@@ -35,6 +37,9 @@ import {
   SearchSuccess,
   SearchFail
 } from './../actions/search.actions';
+
+export const DEBOUNCE = new InjectionToken<number>('Test Debounce');
+export const SCHEDULER = new InjectionToken<Scheduler>('Test Scheduler');
 
 @Injectable()
 export class AppEffects {
@@ -73,7 +78,7 @@ export class AppEffects {
   @Effect()
   search$: Observable<Action> = this.actions$.pipe(
     ofType<Search>(SearchActionTypes.Search),
-    debounceTime(300),
+    debounceTime(this.debounce || 300, this.scheduler || async),
     switchMap((action: Search) => this.dancerService.searchDancers(action.payload).pipe(
       map(dancers => new SearchSuccess(dancers)),
       catchError(err => of(new SearchFail(err)))
@@ -88,6 +93,16 @@ export class AppEffects {
   constructor(
     private actions$: Actions,
     private dancerService: DancerService,
-    private location: Location
+    private location: Location,
+
+    // used only for unit tests to be able to inject a debounce value
+    @Optional()
+    @Inject(DEBOUNCE)
+    private debounce: number,
+
+    // used only for unit tests to be able to inject a test scheduler for observables
+    @Optional()
+    @Inject(SCHEDULER)
+    private scheduler: Scheduler
   ) { }
 }
