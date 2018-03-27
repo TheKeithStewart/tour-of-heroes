@@ -13,7 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/madonna.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/madonna.gif'
         }
       },
       {
@@ -25,7 +25,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/michealJackson.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/mJackson.gif'
         }
       },
       {
@@ -37,7 +37,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/axelRose.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/aRose.gif'
         }
       },
       {
@@ -49,7 +49,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/susannaHoffs.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/sHoffs.gif'
         }
       },
       {
@@ -61,7 +61,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/debbieHarry.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/dHarry.gif'
         }
       },
       {
@@ -73,7 +73,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/davidBowie.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/dBowie.gif'
         }
       },
       {
@@ -85,7 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/mickJagger.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/mJagger.gif'
         }
       },
       {
@@ -97,7 +97,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/stevieNicks.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/sNicks.gif'
         }
       },
       {
@@ -109,7 +109,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/eltonJohn.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/eJohn.gif'
         }
       },
       {
@@ -121,7 +121,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         images: {
           profileUrl: 'assets/jamesHetfield.jpg',
-          danceUrl: 'assets/testPic2.png'
+          danceUrl: 'assets/battle-gif/jHetfield.gif'
         }
       }
     ];

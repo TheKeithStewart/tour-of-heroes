@@ -12,9 +12,10 @@
   <div class="battle">
     <div class="dancer">
       <div>
-
+        <h1> {{ challenger.name }} </h1>
+      </div>
+      <div>
         <img *ngIf="!(battleInProgress$ | async)" class="profile-image" [src]="challenger.images.profileUrl" />
-        <span class="name">{{ challenger.name }}</span>
         <img *ngIf="battleInProgress$ | async" class="dance-image" [src]="challenger.images.danceUrl" />
       </div>
     </div>
@@ -31,8 +32,10 @@
 
       <div class="dancer right-align">
         <div>
+          <h1> {{ challengee.name }} </h1>
+        </div>
+        <div>
           <img *ngIf="!(battleInProgress$ | async)" class="profile-image" [src]="challengee.images.profileUrl" />
-          <span class="name">{{ challengee.name }}</span>
           <img *ngIf="battleInProgress$ | async" class="dance-image" [src]="challengee.images.danceUrl" />
         </div>
       </div>
@@ -41,7 +44,7 @@
 
   <div>
     <button mat-raised-button [disabled]="!(challengersAreChosen$ | async) || (battleInProgress$ | async)" (click)="battle()">
-      Battle! </button>
+    Battle! </button>
   </div>
 
   <div *ngIf="(battleOutcome$ | async) !== null">
