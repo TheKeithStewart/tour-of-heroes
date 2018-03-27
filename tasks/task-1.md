@@ -3,7 +3,7 @@
 * **Task 1 <-**
 * [Task 2](./task-2.md)
 * [Task 3](./task-3.md)
-* [Task 4 (optional)](./task-4.md)
+* [Task 4 (extra credit)](./task-4.md)
 
 ### Description ###
 
@@ -126,8 +126,11 @@ The completed Effect (in the `app.effects.ts` file) should look like this:
 ```ts
 @Effect()
 battle$: Observable<Action> = this.actions$.pipe(
+  // the action that will trigger this effect
   ofType<Battle>(ChallengeActionTypes.Battle),
+  // determine the result of the battle
   switchMap(action => this.dancerService.determineBattleWinnerByCategory(action.payload.challenger, action.payload.challengee).pipe(
+    // map the outcome to return a BattleOutcomeDetermined action
     map((outcome: BattleOutcome) => new BattleOutcomeDetermined(outcome))
   ))
 );
