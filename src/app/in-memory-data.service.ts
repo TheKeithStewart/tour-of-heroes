@@ -12,8 +12,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/madonna.jpg',
+          danceUrl: 'assets/battle-gif/madonna.gif'
         }
       },
       {
@@ -24,8 +24,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/michealJackson.jpg',
+          danceUrl: 'assets/battle-gif/mJackson.gif'
         }
       },
       {
@@ -36,8 +36,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/axelRose.jpg',
+          danceUrl: 'assets/battle-gif/aRose.gif'
         }
       },
       {
@@ -48,8 +48,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/susannaHoffs.jpg',
+          danceUrl: 'assets/battle-gif/sHoffs.gif'
         }
       },
       {
@@ -60,8 +60,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/debbieHarry.jpg',
+          danceUrl: 'assets/battle-gif/dHarry.gif'
         }
       },
       {
@@ -72,8 +72,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/davidBowie.jpg',
+          danceUrl: 'assets/battle-gif/dBowie.gif'
         }
       },
       {
@@ -84,8 +84,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/mickJagger.jpg',
+          danceUrl: 'assets/battle-gif/mJagger.gif'
         }
       },
       {
@@ -96,8 +96,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/stevieNicks.jpg',
+          danceUrl: 'assets/battle-gif/sNicks.gif'
         }
       },
       {
@@ -108,8 +108,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/eltonJohn.jpg',
+          danceUrl: 'assets/battle-gif/eJohn.gif'
         }
       },
       {
@@ -120,8 +120,8 @@ export class InMemoryDataService implements InMemoryDbService {
           disco: 4
         },
         images: {
-          profileUrl: 'assets/testPic.png',
-          danceUrl: 'assets/testPic2.png'
+          profileUrl: 'assets/jamesHetfield.jpg',
+          danceUrl: 'assets/battle-gif/jHetfield.gif'
         }
       }
     ];

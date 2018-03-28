@@ -24,7 +24,7 @@
     <ng-container *ngIf="challengee$ | async as challengee">
       <div>
         <h1>Vs.</h1>
-        
+
         <div *ngIf="battleInProgress$ | async">
           Battle in progress!!!
         </div>
@@ -43,7 +43,8 @@
   </div>
 
   <div>
-    <button mat-raised-button [disabled]="!(challengersAreChosen$ | async) || (battleInProgress$ | async)" (click)="battle()"> Battle! </button>
+    <button mat-raised-button [disabled]="!(challengersAreChosen$ | async) || (battleInProgress$ | async)" (click)="battle()">
+    Battle! </button>
   </div>
 
   <div *ngIf="(battleOutcome$ | async) !== null">

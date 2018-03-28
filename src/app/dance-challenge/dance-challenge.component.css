@@ -1,14 +1,3 @@
-.battle {
-  display: flex;
-}
-
-.dancer {
-  flex: 1;
-}
-
-.right-align {
-  text-align: right;
-}
 
 mat-form-field {
   margin-top: 10px;
@@ -21,4 +10,12 @@ h1 {
 .profile-image {
   height: 50px;
   width: 50px;
+  border-radius: 100px;
+}
+
+.name {
+  color: purple;
+  font-size: 50px;
+  margin: 10px;
+  margin-bottom: 40px;
 }

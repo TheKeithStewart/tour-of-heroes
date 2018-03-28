@@ -18,10 +18,14 @@ button:hover {
 }
 
 .mat-column-id {
-  max-width: 100px;
+  max-width: 50px;
+}
+.mat-column-image {
+  max-width: 50px;
 }
 
 img {
   height: 30px;
   width: 30px;
+  border-radius: 100px;
 }
