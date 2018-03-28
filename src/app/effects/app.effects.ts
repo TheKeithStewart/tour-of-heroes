@@ -9,7 +9,8 @@ import {
   tap,
   debounceTime,
   distinctUntilChanged,
-  switchMap
+  switchMap,
+  delay
 } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';
@@ -37,7 +38,7 @@ import {
   SearchSuccess,
   SearchFail
 } from './../actions/search.actions';
-import { Battle, ChallengeActionTypes, BattleOutcomeDetermined } from '../actions/challenge.actions';
+import { Battle, ChallengeActionTypes, BattleOutcomeDetermined, BattleFail } from '../actions/challenge.actions';
 import { BattleOutcome } from '../reducers/challenge.reducer';
 
 export const DEBOUNCE = new InjectionToken<number>('Test Debounce');

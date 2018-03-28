@@ -31,7 +31,7 @@ import {
   SearchFail
 } from './../actions/search.actions';
 import { BattleOutcome } from '../reducers/challenge.reducer';
-import { Battle, BattleOutcomeDetermined } from '../actions/challenge.actions';
+import { Battle, BattleOutcomeDetermined, BattleFail } from '../actions/challenge.actions';
 
 export class TestActions extends Actions {
   constructor() {
