@@ -201,5 +201,20 @@ describe('AppEffects', () => {
 
       expect(effects.search$).toBeObservable(expected);
     });
+
+    it('should return a SearchSuccess, after a de-bounce, on success', () => {
+      const dancer1 = { id: 1, name: 'test1' } as Dancer;
+      const dancer2 = { id: 2, name: 'test2' } as Dancer;
+      const dancers = [dancer1, dancer2];
+      const action = new Search('test');
+      const completion = new SearchSuccess(dancers);
+
+      actions$.stream = hot('-a---a-a', { a: action });
+      const response = cold('-b|', { b: dancers });
+      const expected = cold('-----c-----c', { c: completion });
+      dancerService.searchDancers.and.returnValue(response);
+
+      expect(effects.search$).toBeObservable(expected);
+    });
   });
 });
