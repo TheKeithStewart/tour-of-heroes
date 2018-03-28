@@ -37,6 +37,8 @@ import {
   SearchSuccess,
   SearchFail
 } from './../actions/search.actions';
+import { Battle, ChallengeActionTypes, BattleOutcomeDetermined } from '../actions/challenge.actions';
+import { BattleOutcome } from '../reducers/challenge.reducer';
 
 export const DEBOUNCE = new InjectionToken<number>('Test Debounce');
 export const SCHEDULER = new InjectionToken<Scheduler>('Test Scheduler');
