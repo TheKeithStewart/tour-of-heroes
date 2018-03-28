@@ -30,6 +30,8 @@ import {
   SearchSuccess,
   SearchFail
 } from './../actions/search.actions';
+import { BattleOutcome } from '../reducers/challenge.reducer';
+import { Battle, BattleOutcomeDetermined } from '../actions/challenge.actions';
 
 export class TestActions extends Actions {
   constructor() {
@@ -50,6 +52,7 @@ class MockDancerService {
   getDancer = jasmine.createSpy('getDancer');
   updateDancer = jasmine.createSpy('updateDancer');
   searchDancers = jasmine.createSpy('searchDancers');
+  determineBattleWinnerByCategory = jasmine.createSpy('determineBattleWinnerByCategory');
 }
 
 describe('AppEffects', () => {
