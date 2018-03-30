@@ -205,7 +205,7 @@ describe('AppEffects', () => {
       expect(effects.search$).toBeObservable(expected);
     });
 
-    it('should return a SearchSuccess, after a de-bounce, on success', () => {
+    it('should return a SearchSuccess, after each de-bounce period, on success', () => {
       const dancer1 = { id: 1, name: 'test1' } as Dancer;
       const dancer2 = { id: 2, name: 'test2' } as Dancer;
       const dancers = [dancer1, dancer2];
