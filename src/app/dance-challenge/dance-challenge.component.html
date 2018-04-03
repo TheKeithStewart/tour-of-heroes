@@ -8,7 +8,7 @@
   </mat-form-field>
 </div>
 
-<div *ngIf="challenger$ | async as challenger">
+<div *ngIf="challenger$ | async">
   <div class="battle">
     <div class="dancer">
       <div>
@@ -21,11 +21,11 @@
     </div>
 
     <!-- Only display the VS. section if a challengee has been selected -->
-    <ng-container *ngIf="challengee$ | async as challengee">
-      <div>
+    <ng-container *ngIf="challengee$ | async">
+      <div class="center">
         <h1>Vs.</h1>
 
-        <div *ngIf="battleInProgress$ | async">
+        <div class="status" *ngIf="battleInProgress$ | async">
           Battle in progress!!!
         </div>
       </div>
@@ -43,8 +43,7 @@
   </div>
 
   <div>
-    <button mat-raised-button [disabled]="!(challengersAreChosen$ | async) || (battleInProgress$ | async)" (click)="battle()">
-    Battle! </button>
+    <button mat-raised-button [disabled]="!(challengersAreChosen$ | async) || (battleInProgress$ | async)" (click)="battle()"> Battle! </button>
   </div>
 
   <div *ngIf="(battleOutcome$ | async) !== null">
