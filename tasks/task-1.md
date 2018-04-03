@@ -25,7 +25,7 @@ Now let's write our first test. The first thing that we need to do is create a n
 ```ts
 describe('battle$', () => {
 
-}
+});
 ```
 
 Inside of the describe add the `it` function that will be your test and explain what you expect to happen in this test:
@@ -33,10 +33,10 @@ Inside of the describe add the `it` function that will be your test and explain 
 ```ts
 it('should return a BattleOutcomeDetermined action on completion', () => {
 
-}
+});
 ```
 
-Next, at the top of the test setup the data that will be needed for this test:
+Next, inside of the test you just added (the `it` function) add the following to setup the data that will be needed for this test:
 
 ```ts
 // BattleOutcome is an enum representing the different possible outcomes

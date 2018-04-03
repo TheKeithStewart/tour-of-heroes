@@ -220,4 +220,6 @@ describe('AppEffects', () => {
       expect(effects.search$).toBeObservable(expected);
     });
   });
+
+  // the describe function for the battle effect goes here
 });
