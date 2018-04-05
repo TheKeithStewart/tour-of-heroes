@@ -134,3 +134,5 @@ battle$: Observable<Action> = this.actions$.pipe(
   ))
 );
 ```
+
+Go to [Task 2](./task-2.md)
