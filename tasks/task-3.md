@@ -107,3 +107,5 @@ battle$: Observable<Action> = this.actions$.pipe(
   ))
 );
 ```
+
+#### You're done! Peace out yo! ####
