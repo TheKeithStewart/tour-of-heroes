@@ -6,7 +6,7 @@
 
 ### Description ###
 
-When a `Battle` action is dispatched the dance battle begins. The winner is determined by executing the DancerService.determineBattleWinnerByCategory() function. The result of that function should be included as the payload of the `BattleOutcomeDetermined` action completing the effect.
+When a `Battle` action is dispatched the gnarly dance battle begins. The winner is determined by executing the DancerService.determineBattleWinnerByCategory() function. The result of that function should be included as the payload of the `BattleOutcomeDetermined` action completing the effect.
 
 ### Steps ###
 
@@ -19,7 +19,7 @@ battle$: Observable<Action> = this.actions$.pipe(
 );
 ```
 
-Now let's write our first test. The first thing that we need to do is create a new `describe` function to group together the tests for our `battle$` effect. Add the following to the bottom of the `AppEffects` describe function in `src/app/effects/app.effects.spec.ts`:
+Now let's write our first test. The first thing that we need to do is create a new `describe` function to group together the tests for our `battle$` effect. Add the following to like the bottom of the `AppEffects` describe function in `src/app/effects/app.effects.spec.ts`:
 
 ```ts
 describe('battle$', () => {
@@ -75,7 +75,7 @@ const expected = cold('--c', { c: completion });
 dancerService.determineBattleWinnerByCategory.and.returnValue(battle);
 ```
 
-Lastly we add our expectations:
+Lastly we add our righteous expectations:
 
 ```ts
 // the end result of the battle$ effect
@@ -118,7 +118,7 @@ describe('battle$', () => {
 });
 ```
 
-Once you have done this you will have a unit test that is failing. The next thing that we need to do is write the rest of the Effect to get the test to pass.
+Once you have done this you will have a unit test that is failing, while that is grody to the max, the next thing that we need to do is write the rest of the Effect to get the test to pass which is totally tubular!
 
 The completed Effect (in the `app.effects.ts` file) should look like this:
 
