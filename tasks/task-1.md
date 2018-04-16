@@ -6,7 +6,7 @@
 
 ### Description ###
 
-When a `Battle` action is dispatched the dance battle begins. The winner is determined by executing the DancerService.determineBattleWinnerByCategory() function. The result of that function should be included as the payload of the `BattleOutcomeDetermined` action completing the effect.
+When a `Battle` action is dispatched the gnarly dance battle begins. The winner is determined by executing the DancerService.determineBattleWinnerByCategory() function. The result of that function should be included as the payload of the `BattleOutcomeDetermined` action completing the effect.
 
 ### Steps ###
 
@@ -118,7 +118,7 @@ describe('battle$', () => {
 });
 ```
 
-Once you have done this you will have a unit test that is failing. The next thing that we need to do is write the rest of the Effect to get the test to pass.
+Once you have done this you will have a unit test that is failing, while that is grody to the max, the next thing that we need to do is write the rest of the Effect to get the test to pass which is totally tubular!
 
 The completed Effect (in the `app.effects.ts` file) should look like this:
 
